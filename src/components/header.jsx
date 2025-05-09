@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 import { Search, ShoppingCart, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ModeToggle } from "./mode-toogle"
+import LanguageSelector from "./language/language-selector"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -59,23 +60,12 @@ export default function Header() {
         </nav>
 
         <div className="hidden md:flex items-center space-x-4">
-          <Button variant="ghost" size="icon">
-            <Search className="h-5 w-5" />
-          </Button>
-          <Button variant="ghost" size="icon">
-            <ShoppingCart className="h-5 w-5" />
-          </Button>
+          <LanguageSelector />
           <ModeToggle />
         </div>
 
         {/* Mobile Menu Button */}
         <div className="flex items-center space-x-4 md:hidden">
-          <Button variant="ghost" size="icon">
-            <Search className="h-5 w-5" />
-          </Button>
-          <Button variant="ghost" size="icon">
-            <ShoppingCart className="h-5 w-5" />
-          </Button>
           <ModeToggle />
           <Button variant="ghost" size="icon" onClick={toggleMenu}>
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}

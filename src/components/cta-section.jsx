@@ -26,7 +26,7 @@ export default function CTASection() {
               Are You Looking For An Affordable Bikes And Scooters Rental Service?
             </h2>
             <Link href="/contact">
-              <Button className="bg-zinc-900 hover:bg-zinc-800 text-white">
+              <Button className="bg-zinc-900 hover:bg-orange-500 text-white">
                 Contact Us <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>

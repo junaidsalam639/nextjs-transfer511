@@ -4,7 +4,7 @@ import { GoogleMap, Marker, DirectionsRenderer } from '@react-google-maps/api';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle,  CardFooter } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Loader2 } from 'lucide-react';
@@ -61,6 +61,47 @@ const TripDetailSection = ({ data }) => {
   return (
     <div className="space-y-8 py-20">
       <div className="container max-w-7xl mx-auto px-4 space-y-8">
+        <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6">
+          {carData?.map((car, idx) => (
+            <Card key={idx} className="hover:shadow-lg transition-shadow pt-0 pb-5">
+              <CardContent className="p-0">
+                <img
+                  src={car.image}
+                  alt={car.title}
+                  className="w-full h-48 object-cover rounded-t-lg"
+                />
+                <div className="p-6">
+                  <CardTitle className="text-xl mb-3">{car.title}</CardTitle>
+                  <ul className="text-sm text-muted-foreground space-y-2 mb-4">
+                    <li className="flex items-center gap-2">
+                      <span>✓</span> 60 min Wartezeit (Flughafen)
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span>✓</span> 15 min für andere Abholungen
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span>✓</span> Kostenlose Stornierung (24h vorher)
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span>✓</span> Gratis WLAN & Wasser
+                    </li>
+                  </ul>
+                  <div className="flex justify-between text-sm mb-4">
+                    <Badge variant="secondary">🧑‍🤝‍🧑 {car.seats} Sitze</Badge>
+                    <Badge variant="secondary">🧳 {car.bags} Gepäck</Badge>
+                  </div>
+                </div>
+              </CardContent>
+              <CardFooter className="flex flex-col gap-3">
+                <p className="text-xl font-bold text-orange-500 w-full text-right">€{car.price}</p>
+                <Button asChild className="w-full bg-orange-500 hover:bg-orange-600">
+                  <Link href={car.link}>Weiter</Link>
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+
         <div className="grid lg:grid-cols-2 gap-8">
           <Card>
             <CardHeader>
@@ -120,46 +161,6 @@ const TripDetailSection = ({ data }) => {
           </Card>
         </div>
 
-        <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6">
-          {carData?.map((car, idx) => (
-            <Card key={idx} className="hover:shadow-lg transition-shadow pt-0 pb-5">
-              <CardContent className="p-0">
-                <img
-                  src={car.image}
-                  alt={car.title}
-                  className="w-full h-48 object-cover rounded-t-lg"
-                />
-                <div className="p-6">
-                  <CardTitle className="text-xl mb-3">{car.title}</CardTitle>
-                  <ul className="text-sm text-muted-foreground space-y-2 mb-4">
-                    <li className="flex items-center gap-2">
-                      <span>✓</span> 60 min Wartezeit (Flughafen)
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span>✓</span> 15 min für andere Abholungen
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span>✓</span> Kostenlose Stornierung (24h vorher)
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span>✓</span> Gratis WLAN & Wasser
-                    </li>
-                  </ul>
-                  <div className="flex justify-between text-sm mb-4">
-                    <Badge variant="secondary">🧑‍🤝‍🧑 {car.seats} Sitze</Badge>
-                    <Badge variant="secondary">🧳 {car.bags} Gepäck</Badge>
-                  </div>
-                </div>
-              </CardContent>
-              <CardFooter className="flex flex-col gap-3">
-                <p className="text-xl font-bold text-orange-500 w-full text-right">€{car.price}</p>
-                <Button asChild className="w-full bg-orange-500 hover:bg-orange-600">
-                  <Link href={car.link}>Weiter</Link>
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
       </div>
     </div>
   );

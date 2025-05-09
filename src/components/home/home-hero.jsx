@@ -64,7 +64,7 @@ function HomeHero() {
                                 <label className="block text-sm font-medium mb-1">Suchen</label>
                                 <Button
                                     onClick={handleSearchClick}
-                                    className="bg-zinc-900 hover:bg-zinc-800 text-white w-full">
+                                    className="bg-zinc-900 hover:bg-orange-500 text-white w-full">
                                     Suchen
                                 </Button>
                             </div>

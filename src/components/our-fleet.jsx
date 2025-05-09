@@ -11,9 +11,9 @@ function OurFleet({ carData }) {
                     <h2 className="text-3xl font-bold mb-12 text-center">Unsere Flotte</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {carData.map((car, index) => (
-                            <Card key={index} className="overflow-hidden py-0">
-                                <div className="relative h-48">
-                                    <Image src={car.image} alt={car.title} fill className="object-cover" />
+                            <Card key={index} className="overflow-hidden py-0 cursor-pointer">
+                                <div className="relative h-48 overflow-hidden">
+                                    <Image src={car.image} alt={car.title} fill className="object-cover hover:scale-125 transition-all duration-300" />
                                 </div>
                                 <CardContent className="p-4">
                                     <h3 className="text-xl font-bold text-primary mb-1">{car.title}</h3>
@@ -28,7 +28,7 @@ function OurFleet({ carData }) {
                                             <span className="ml-1 text-sm">{car.luggage}</span>
                                         </div>
                                     </div>
-                                    <Button className="w-full bg-zinc-900 hover:bg-zinc-800 text-white">
+                                    <Button className="w-full bg-zinc-900 hover:bg-orange-500 text-white">
                                         BOOK NOW <ArrowRight className="ml-2 h-4 w-4" />
                                     </Button>
                                 </CardContent>

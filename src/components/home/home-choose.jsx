@@ -10,28 +10,28 @@ function HomeChoose() {
                             <h2 className="text-3xl font-bold mb-6">Warum Sie Transfer511 wählen sollten</h2>
                             <ul className="space-y-4">
                                 <li className="flex items-start">
-                                    <span className="bg-primary text-white p-1 rounded-full mr-3 mt-1">✓</span>
+                                    <span className=" text-white p-1 rounded-full mr-3 mt-1">✓</span>
                                     <div>
                                         <h3 className="font-semibold mb-1">Zuverlässigkeit</h3>
                                         <p className="text-gray-300">Über 10 Jahre Erfahrung im Flughafentransfer</p>
                                     </div>
                                 </li>
                                 <li className="flex items-start">
-                                    <span className="bg-primary text-white p-1 rounded-full mr-3 mt-1">✓</span>
+                                    <span className=" text-white p-1 rounded-full mr-3 mt-1">✓</span>
                                     <div>
                                         <h3 className="font-semibold mb-1">Faire Preise</h3>
                                         <p className="text-gray-300">Keine versteckten Kosten</p>
                                     </div>
                                 </li>
                                 <li className="flex items-start">
-                                    <span className="bg-primary text-white p-1 rounded-full mr-3 mt-1">✓</span>
+                                    <span className=" text-white p-1 rounded-full mr-3 mt-1">✓</span>
                                     <div>
                                         <h3 className="font-semibold mb-1">Komfortable Fahrzeuge</h3>
                                         <p className="text-gray-300">Moderne und gepflegte Fahrzeuge</p>
                                     </div>
                                 </li>
                                 <li className="flex items-start">
-                                    <span className="bg-primary text-white p-1 rounded-full mr-3 mt-1">✓</span>
+                                    <span className=" text-white p-1 rounded-full mr-3 mt-1">✓</span>
                                     <div>
                                         <h3 className="font-semibold mb-1">24/7 Erreichbar</h3>
                                         <p className="text-gray-300">Rund um die Uhr für Sie verfügbar</p>
@@ -46,7 +46,7 @@ function HomeChoose() {
                                 fill
                                 className="rounded-lg object-cover"
                             />
-                            <div className="absolute -bottom-6 -right-6 bg-primary text-white p-4 rounded-lg">
+                            <div className="absolute -bottom-6 -right-6  text-white p-4 rounded-lg">
                                 <p className="font-bold">100% Kundenzufriedenheit</p>
                             </div>
                         </div>

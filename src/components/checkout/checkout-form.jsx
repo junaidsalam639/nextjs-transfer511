@@ -171,7 +171,7 @@ function CheckoutForm({ data }) {
                 </Label>
             </div>
 
-            <Button className="w-full py-6 text-lg" size="lg">
+            <Button className="w-full bg-zinc-900 hover:bg-orange-500 text-white">
                 Place Order (Payment Required)
             </Button>
         </div>

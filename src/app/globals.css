@@ -203,3 +203,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+body > .skiptranslate {
+  display: none;
+}
