@@ -15,7 +15,7 @@ function HomeHowItsWork({ steps }) {
                     <h2 className="text-3xl font-bold text-white text-center mb-12 z-10 relative">
                         So funktioniert es
                     </h2>
-                 
+
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 z-10 relative">
                         {steps.map((step, index) => (
                             <div
@@ -29,7 +29,8 @@ function HomeHowItsWork({ steps }) {
                                 </div>
 
                                 <div className="relative h-full w-full rounded-full overflow-hidden">
-                                    <div className="absolute inset-0 bg-gradient-to-t from-[#E87447] via-[#E87447] to-transparent opacity-0 group-hover:opacity-90 transition-all duration-500 ease-in-out z-0"></div>
+                                    <div className="absolute inset-0 bg-[#E87447] transform -translate-y-full transition-transform duration-500 ease-in-out z-0 group-hover:translate-y-0"></div>
+
                                     <div className="relative z-10 h-full flex flex-col items-center justify-center p-4">
                                         <div className="mb-4 text-orange-500 group-hover:text-white transition-colors duration-500 transform group-hover:scale-110">
                                             {step.icon}
@@ -44,6 +45,7 @@ function HomeHowItsWork({ steps }) {
                                 </div>
                             </div>
                         ))}
+
                     </div>
 
                 </div>

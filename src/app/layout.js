@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google"
+import { Roboto } from 'next/font/google'
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import Header from "@/components/header"
@@ -8,14 +8,18 @@ import { LoadedScript } from "./LoadedScipt"
 import CookiesProviders from "@/providers/cookies-providers"
 import GoogleTranslate from "@/components/language/google-translate"
 
-const inter = Inter({ subsets: ["latin"] })
+
+const roboto = Roboto({
+  weight: '400',
+  subsets: ['latin'],
+})
 
 export default function RootLayout({
   children,
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased`}>
+      <body className={roboto.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <CookiesProviders>
             <LoadedScript>
