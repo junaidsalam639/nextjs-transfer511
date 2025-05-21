@@ -4,8 +4,6 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { LoadedScript } from "./LoadedScipt"
 import CookiesProviders from "@/providers/cookies-providers"
 import GoogleTranslate from "@/components/language/google-translate"
-import { ReactQueryProvider } from '@/providers/ReactQueryProvider'
-
 
 const roboto = Roboto({
   weight: '400',
@@ -19,7 +17,6 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={roboto.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <ReactQueryProvider>
             <CookiesProviders>
               <LoadedScript>
                 <div className="relative min-h-screen">
@@ -28,7 +25,6 @@ export default function RootLayout({
                 <GoogleTranslate />
               </LoadedScript>
             </CookiesProviders>
-          </ReactQueryProvider>
         </ThemeProvider>
       </body>
     </html>
