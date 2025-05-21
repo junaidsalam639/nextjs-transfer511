@@ -6,8 +6,8 @@ export default function Footer() {
   return (
     <footer className="bg-zinc-900 text-white pt-12 pb-6">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+          <div className="md:col-span-4">
             <div className="mb-4">
               <Image src="/assets/logo/logo.png" alt="Rentol" width={120} height={40} className="object-contain" />
             </div>
@@ -30,41 +30,8 @@ export default function Footer() {
             </div>
           </div>
 
-          <div>
-            <h3 className="text-lg font-semibold mb-4 relative inline-block">
-              Discover
-              <span className="absolute bottom-0 left-0 w-1/2 h-0.5 bg-primary"></span>
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <Link href="#" className="text-zinc-400 hover:text-primary transition-colors">
-                  Rental Tips
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-zinc-400 hover:text-primary transition-colors">
-                  News & Updates
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-zinc-400 hover:text-primary transition-colors">
-                  Low-Cost Rent
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-zinc-400 hover:text-primary transition-colors">
-                  Scooter Adventures
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-zinc-400 hover:text-primary transition-colors">
-                  Insurance Cases
-                </Link>
-              </li>
-            </ul>
-          </div>
 
-          <div>
+          <div className="col-span-4">
             <h3 className="text-lg font-semibold mb-4 relative inline-block">
               Customer Info
               <span className="absolute bottom-0 left-0 w-1/2 h-0.5 bg-primary"></span>
@@ -93,7 +60,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div className="col-span-4">
             <h3 className="text-lg font-semibold mb-4 relative inline-block">
               Contact Us
               <span className="absolute bottom-0 left-0 w-1/2 h-0.5 bg-primary"></span>

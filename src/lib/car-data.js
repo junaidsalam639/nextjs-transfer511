@@ -1,8 +1,7 @@
-import { id } from "date-fns/locale";
 
 export const carData = [
     {
-        id,
+        id: 1,
         title: 'Standard Kombi Class',
         price: '715.65',
         seats: 4,

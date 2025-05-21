@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import Image from "next/image";
 import { Badge } from "../ui/badge";
+import { Textarea } from "../ui/textarea";
 
 function CheckoutForm({ data }) {
 
@@ -50,18 +51,6 @@ function CheckoutForm({ data }) {
             <div className="space-y-4 mb-6">
                 <Card className="bg-secondary">
                     <CardContent className="p-3 flex items-center">
-                        <Checkbox id="account" className="mr-2" />
-                        <Label htmlFor="account" className="text-sm">
-                            Already have an account?{" "}
-                            <Button variant="link" className="text-primary p-0 h-auto">
-                                Click here to login
-                            </Button>
-                        </Label>
-                    </CardContent>
-                </Card>
-
-                <Card className="bg-secondary">
-                    <CardContent className="p-3 flex items-center">
                         <Checkbox id="coupon" className="mr-2" />
                         <Label htmlFor="coupon" className="text-sm">
                             Have a coupon code?{" "}
@@ -83,10 +72,6 @@ function CheckoutForm({ data }) {
                         <Input placeholder="Last Name *" />
                         <Input placeholder="Phone Number" />
                         <Input placeholder="Email Address *" type="email" />
-                        <div className="flex items-center gap-2">
-                            <Checkbox id="create-account" />
-                            <Label htmlFor="create-account">Create an account?</Label>
-                        </div>
                     </CardContent>
                 </Card>
 
@@ -95,10 +80,10 @@ function CheckoutForm({ data }) {
                         <CardTitle className="text-lg">Additional Information</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                        <Input placeholder="Order notes (optional)" />
                         <Input placeholder="Flight number (optional)" />
                         <Input placeholder="Passengers (optional)" />
                         <Input placeholder="Luggage (optional)" />
+                        <Textarea placeholder="Order notes (optional)" rows={5} />
                     </CardContent>
                 </Card>
             </div>
@@ -148,9 +133,6 @@ function CheckoutForm({ data }) {
                             <RadioGroupItem value="paypal" id="paypal" />
                             <Label htmlFor="paypal">
                                 PayPal{" "}
-                                <Button variant="link" className="text-primary p-0 h-auto">
-                                    What is PayPal?
-                                </Button>
                             </Label>
                         </div>
                         <div className="flex items-center space-x-2">
@@ -172,7 +154,7 @@ function CheckoutForm({ data }) {
             </div>
 
             <Button className="w-full bg-zinc-900 hover:bg-orange-500 text-white">
-                Place Order (Payment Required)
+                Place Order 
             </Button>
         </div>
     );

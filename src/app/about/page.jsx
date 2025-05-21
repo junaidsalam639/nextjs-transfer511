@@ -3,6 +3,9 @@ import FAQSection from "@/components/faq-section"
 import CTASection from "@/components/cta-section"
 import Count from "@/components/count"
 import AboutText from "@/components/about/about-text"
+import Header from "@/components/header"
+import SocialSidebar from "@/components/social-sidebar"
+import Footer from "@/components/footer"
 
 export const metadata = {
   title: "About Us | Transfer511",
@@ -12,11 +15,14 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <>
+      <Header />
       <HeroSection title="About" subtitle="Buchen Sie Ihren Transfer einfach und schnell" />
       <AboutText />
       <Count />
       <FAQSection />
       <CTASection />
+      <SocialSidebar />
+      <Footer />
     </>
   )
 }

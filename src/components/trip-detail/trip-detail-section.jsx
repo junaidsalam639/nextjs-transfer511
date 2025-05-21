@@ -123,11 +123,6 @@ const TripDetailSection = ({ data }) => {
                 <span>{distance} km</span>
               </div>
               <Separator />
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Preis pro km:</span>
-                <span>€{pricePerKm}</span>
-              </div>
-              <Separator />
               <div className="flex justify-between text-lg font-bold text-orange-600">
                 <span>Gesamtpreis:</span>
                 <span>€{totalPrice}</span>

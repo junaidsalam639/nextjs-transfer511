@@ -8,6 +8,9 @@ import OurFleet from "@/components/our-fleet"
 import HomeChoose from "@/components/home/home-choose"
 import HomeTestimonial from "@/components/home/home-testimonial"
 import Count from "@/components/count"
+import Header from "@/components/header"
+import SocialSidebar from "@/components/social-sidebar"
+import Footer from "@/components/footer"
 
 export const metadata = {
   title: "Home | Transfer511",
@@ -70,6 +73,7 @@ export default function Home() {
 
   return (
     <>
+      <Header />
       <HomeHero />
       <HomeYourAdvantages />
       <Count />
@@ -79,6 +83,8 @@ export default function Home() {
       <FAQSection />
       <HomeTestimonial />
       <CTASection />
+      <SocialSidebar />
+      <Footer />
     </>
   )
 }
