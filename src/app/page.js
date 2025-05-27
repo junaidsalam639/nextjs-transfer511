@@ -23,47 +23,47 @@ export default function Home() {
     {
       number: "01",
       icon: <Bike className="w-12 h-12 text-primary" />,
-      title: "Anfrage stellen",
-      description: "Online, Telefonisch Oder Per WhatsApp",
+      title: "Send Request",
+      description: "(Online, Phone, WhatsApp)",
     },
     {
       number: "02",
       icon: <CalendarCheck className="w-12 h-12 text-primary" />,
-      title: "Buchung bestätigen",
-      description: "Wir Garantieren Eine Schnelle Rückmeldung",
+      title: "Booking Confirmation",
+      description: "(Quick response guaranteed)",
     },
     {
       number: "03",
       icon: <ThumbsUp className="w-12 h-12 text-primary" />,
-      title: "Entspannt reisen",
-      description: "Wir Kümmern Uns Um Den Rest!",
+      title: "Travel Comfortably",
+      description: "(We handle everything)",
     },
   ];
 
   const carData = [
     {
-      title: 'LIMOUSINE',
+      title: 'Limousine',
       subtitle: 'Standard motor Cars',
       image: '/assets/images/cars/card-one.jpeg',
       passengers: 4,
       luggage: 3,
     },
     {
-      title: 'KOMBI',
+      title: 'Station Wagon',
       subtitle: 'Fit, Brutale',
       image: '/assets/images/cars/card-two.webp',
       passengers: 4,
       luggage: 4,
     },
     {
-      title: '7-SITZER',
+      title: '7-Seater',
       subtitle: 'Standard motor Cars',
       image: '/assets/images/cars/card-three.jpeg',
       passengers: 7,
       luggage: 5,
     },
     {
-      title: '9-SITZER',
+      title: '9-Seater',
       subtitle: 'Fit, Brutale',
       image: '/assets/images/cars/card-four.jpeg',
       passengers: 9,

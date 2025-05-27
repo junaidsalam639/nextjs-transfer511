@@ -7,34 +7,34 @@ function HomeChoose() {
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                         <div>
-                            <h2 className="text-3xl font-bold mb-6">Warum Sie Transfer511 wählen sollten</h2>
+                            <h2 className="text-3xl font-bold mb-6">Why Choose Transfer511</h2>
                             <ul className="space-y-4">
                                 <li className="flex items-start">
                                     <span className=" text-white p-1 rounded-full mr-3 mt-1">✓</span>
                                     <div>
-                                        <h3 className="font-semibold mb-1">Zuverlässigkeit</h3>
-                                        <p className="text-gray-300">Über 10 Jahre Erfahrung im Flughafentransfer</p>
+                                        <h3 className="font-semibold mb-1">Reliable</h3>
+                                        <p className="text-gray-300">Over 10 years of experience</p>
                                     </div>
                                 </li>
                                 <li className="flex items-start">
                                     <span className=" text-white p-1 rounded-full mr-3 mt-1">✓</span>
                                     <div>
-                                        <h3 className="font-semibold mb-1">Faire Preise</h3>
-                                        <p className="text-gray-300">Keine versteckten Kosten</p>
+                                        <h3 className="font-semibold mb-1">Fair Prices</h3>
+                                        <p className="text-gray-300">No hidden fees</p>
                                     </div>
                                 </li>
                                 <li className="flex items-start">
                                     <span className=" text-white p-1 rounded-full mr-3 mt-1">✓</span>
                                     <div>
-                                        <h3 className="font-semibold mb-1">Komfortable Fahrzeuge</h3>
-                                        <p className="text-gray-300">Moderne und gepflegte Fahrzeuge</p>
+                                        <h3 className="font-semibold mb-1">Comfortable Vehicles</h3>
+                                        <p className="text-gray-300">Modern and clean</p>
                                     </div>
                                 </li>
                                 <li className="flex items-start">
                                     <span className=" text-white p-1 rounded-full mr-3 mt-1">✓</span>
                                     <div>
-                                        <h3 className="font-semibold mb-1">24/7 Erreichbar</h3>
-                                        <p className="text-gray-300">Rund um die Uhr für Sie verfügbar</p>
+                                        <h3 className="font-semibold mb-1">24/7 Availability</h3>
+                                        <p className="text-gray-300">Always here for you</p>
                                     </div>
                                 </li>
                             </ul>
@@ -47,7 +47,7 @@ function HomeChoose() {
                                 className="rounded-lg object-cover"
                             />
                             <div className="absolute -bottom-6 -right-6  text-white p-4 rounded-lg">
-                                <p className="font-bold">100% Kundenzufriedenheit</p>
+                                <p className="font-bold">100% Customer Satisfaction</p>
                             </div>
                         </div>
                     </div>

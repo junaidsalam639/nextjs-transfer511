@@ -7,57 +7,57 @@ export default function FAQSection() {
     const faqs = [
         {
             id: "1",
-            question: 'Was macht Transfer511 besonders?',
+            question: 'What makes Transfer511 special?',
             answer:
-                'Bei Transfer511 erleben Sie zuverlässigen Flughafentransfer auf höchstem Niveau. Unsere modernen Fahrzeuge, geschulten Fahrer und unser Fokus auf erstklassigen Service garantieren eine entspannte und pünktliche Ankunft – ob privat oder geschäftlich.',
+                'Transfer511 offers premium airport transfer services with a focus on reliability and comfort. Our modern fleet, professional drivers, and commitment to top-tier service ensure you arrive relaxed and on time—whether you\'re traveling for business or leisure.',
         },
         {
             id: "2",
-            question: 'Wie kann ich eine Reservierung bei Transfer511 vornehmen?',
+            question: 'How can I make a reservation?',
             answer:
-                'Ihre Buchung bei Transfer511 ist ganz einfach: Über unsere benutzerfreundliche Website geben Sie Ihre Abhol- und Rückgabedaten ein, wählen Ihr Wunschfahrzeug aus und bestätigen Datum sowie Uhrzeit. Schon ist Ihr Transfer sicher gebucht!',
+                'Booking with Transfer511 is quick and easy. Simply visit our user-friendly website, enter your pickup and drop-off details, choose your preferred vehicle, and confirm the date and time. Your transfer will be booked in just a few steps!',
         },
         {
             id: "3",
-            question: 'Welche Fahrzeugoptionen gibt es bei Transfer511?',
+            question: 'What vehicle options are available?',
             answer:
-                'Unsere vielseitige Flotte bietet Ihnen luxuriöse Limousinen, geräumige SUVs und komfortable Shuttle-Vans. Wählen Sie das passende Fahrzeug je nach Anzahl der Personen und Gepäck – für eine stilvolle und entspannte Fahrt.',
+                'Our diverse fleet includes luxurious sedans, spacious SUVs, and comfortable shuttle vans. Whether you\'re traveling alone or in a group, we have the perfect vehicle to match your passenger and luggage needs for a stylish and relaxed journey.',
         },
         {
             id: "4",
-            question: 'Ist Transfer511 rund um die Uhr erreichbar?',
+            question: 'Is Transfer511 available 24/7?',
             answer:
-                'Ja, Transfer511 ist 24 Stunden am Tag, 7 Tage die Woche und 365 Tage im Jahr für Sie erreichbar. Wir wissen, dass Reisepläne flexibel sein müssen – deshalb sind wir jederzeit für Sie da, wenn Sie uns brauchen.',
+                'Yes, Transfer511 operates 24 hours a day, 7 days a week, all year round. We understand that travel schedules can vary, which is why we’re always available whenever you need us.',
         },
         {
             id: "5",
-            question: 'Kann ich meine Reservierung ändern, wenn sich meine Pläne ändern?',
+            question: 'Can I change my reservation?',
             answer:
-                'Bei Transfer511 steht Flexibilität an erster Stelle. Sie können Ihre Reservierung problemlos innerhalb eines festgelegten Zeitrahmens vor der Abholung ändern. Melden Sie sich einfach online in Ihrem Kundenkonto an oder kontaktieren Sie unseren Kundenservice.',
+                'At Transfer511, flexibility is a priority. You can easily modify your booking within a specified time frame before your scheduled pickup. Just log in to your customer account online or contact our support team for assistance.',
         },
         {
             id: "6",
-            question: 'Wie finde ich meinen Fahrer am Flughafen?',
+            question: 'How do I find my driver at the airport?',
             answer:
-                'Transfer511 stellt Ihnen klare Anweisungen für den Treffpunkt zur Verfügung. Ihr freundlicher Fahrer erwartet Sie dort mit einem personalisierten Schild, damit Sie ihn schnell und unkompliziert finden.',
+                'Transfer511 provides clear instructions for your meeting point. Your friendly driver will be waiting there with a personalized sign, making it easy for you to spot them right away.',
         },
         {
             id: "7",
-            question: 'Was passiert, wenn mein Flug Verspätung hat?',
+            question: 'What happens if my flight is delayed?',
             answer:
-                'Transfer511 verfolgt Ihren Flug in Echtzeit. Bei Verspätungen passen wir Ihre Abholzeit automatisch an, sodass Ihr Fahrer pünktlich bei Ihrer Ankunft bereitsteht.',
+                'We track your flight in real time. If there’s a delay, we automatically adjust your pickup time so your driver is there right when you land—no extra steps needed.',
         },
         {
             id: "8",
-            question: 'Kann ich Kindersitze für meine Reise anfordern?',
+            question: 'Can I request child seats?',
             answer:
-                'Ja, bei Transfer511 kümmern wir uns um die Sicherheit Ihrer Familie. Geben Sie einfach während des Buchungsprozesses die Anzahl und Art der benötigten Kindersitze an.',
+                'Absolutely. Your family’s safety is important to us. Just specify the number and type of child seats you need during the booking process, and we’ll take care of the rest.',
         },
         {
             id: "9",
-            question: 'Wie kann ich den Kundensupport von Transfer511 erreichen?',
+            question: 'How can I contact Transfer511 customer support?',
             answer:
-                'Unser freundliches Kundenserviceteam ist einfach über die auf unserer Website oder in Ihrer Bestätigungs-E-Mail angegebenen Kontaktdaten erreichbar. Wir sind jederzeit für Sie da und helfen Ihnen gerne bei allen Fragen und Anliegen.',
+                'Our friendly support team is easily reachable through the contact details provided on our website or in your confirmation email. We’re always here to help with any questions or concerns you may have.',
         },
     ];
 
@@ -65,7 +65,7 @@ export default function FAQSection() {
     return (
         <section className="py-16 bg-gray-50 dark:bg-zinc-900">
             <div className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold mb-12 text-center">Meist gestellte Fragen</h2>
+                <h2 className="text-3xl font-bold mb-12 text-center">Frequently Asked Questions</h2>
                 <div className="max-w-3xl mx-auto">
                     <Accordion type="single" collapsible className="space-y-4">
                         {faqs.map((faq) => (

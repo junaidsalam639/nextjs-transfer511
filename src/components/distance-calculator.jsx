@@ -111,10 +111,10 @@ const DistanceCalculator = forwardRef(({ GOOGLE_MAPS_API_KEY, onSearch }, ref) =
             <Autocomplete className="md:col-span-6 col-span-1"
                 onLoad={setStartAutocomplete} onPlaceChanged={handleStartPlaceSelected}>
                 <div>
-                    <label className="block text-sm font-medium mb-1">Abholadresse - Komplett-Adresse eingeben</label>
+                    <label className="block text-sm font-medium mb-1">Pickup Address – Enter full address</label>
                     <div className="relative">
                         <Input
-                            placeholder="Abholadresse - Komplett-Adresse eingeben"
+                            placeholder="Pickup Address – Enter full address"
                             value={startAddress}
                             onChange={(e) => setStartAddress(e.target.value)}
                             className="pl-10" />
@@ -125,10 +125,10 @@ const DistanceCalculator = forwardRef(({ GOOGLE_MAPS_API_KEY, onSearch }, ref) =
             <Autocomplete className="md:col-span-6 col-span-1"
                 onLoad={setEndAutocomplete} onPlaceChanged={handleEndPlaceSelected}>
                 <div>
-                    <label className="block text-sm font-medium mb-1">Zieladresse - Komplett-Adresse eingeben</label>
+                    <label className="block text-sm font-medium mb-1">Destination Address – Enter full address</label>
                     <div className="relative">
                         <Input
-                            placeholder="Zieladresse - Komplett-Adresse eingeben"
+                            placeholder="Destination Address – Enter full address"
                             value={endAddress}
                             onChange={(e) => setEndAddress(e.target.value)}
                             className="pl-10" />

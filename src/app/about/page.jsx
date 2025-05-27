@@ -16,7 +16,7 @@ export default function AboutPage() {
   return (
     <>
       <Header />
-      <HeroSection title="About" subtitle="Buchen Sie Ihren Transfer einfach und schnell" />
+      <HeroSection title="About Us" subtitle="Buchen Sie Ihren Transfer einfach und schnell" />
       <AboutText />
       <Count />
       <FAQSection />

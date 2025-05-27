@@ -13,7 +13,7 @@ function HomeHowItsWork({ steps }) {
 
                 <div className="relative container mx-auto px-4">
                     <h2 className="text-3xl font-bold text-white text-center mb-12 z-10 relative">
-                        So funktioniert es
+                    How It Works
                     </h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 z-10 relative">

@@ -6,7 +6,7 @@ function HomeYourAdvantages() {
         <>
             <section className="py-16">
                 <div className="container mx-auto px-4">
-                    <h2 className="text-3xl font-bold mb-12 text-center">Ihre Vorteile bei uns</h2>
+                    <h2 className="text-3xl font-bold mb-12 text-center">Your Benefits with Us</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div className="w-full h-full relative">
                             <Image
@@ -20,23 +20,23 @@ function HomeYourAdvantages() {
                             {[
                                 {
                                     icon: <CreditCard className="w-8 h-8" />,
-                                    title: "Kartenakzeptanz",
-                                    desc: "Wir akzeptieren alle gängigen Zahlungsmethoden ohne zusätzliche Gebühren.",
+                                    title: "Card Payments",
+                                    desc: "All major payment methods accepted with no extra fees.",
                                 },
                                 {
                                     icon: <Clock3 className="w-8 h-8" />,
-                                    title: "Kostenlose Wartezeit",
-                                    desc: "Wir versichern Ihnen eine kostenlose Wartezeit von 60 Minuten an allen Flughäfen. Alle anderen Standorte beinhalten eine Wartezeit von 15 Minuten.",
+                                    title: "Free Waiting Time",
+                                    desc: "60 minutes at airports, 15 minutes elsewhere.",
                                 },
                                 {
                                     icon: <ShieldCheck className="w-8 h-8" />,
-                                    title: "Festpreis-Garantie",
-                                    desc: "Starten Sie entspannt – mit transparenten Festpreisen, ohne versteckte Kosten und Bestpreisgarantie.",
+                                    title: "Fixed Price Guarantee",
+                                    desc: "Transparent pricing without hidden fees.",
                                 },
                                 {
                                     icon: <XCircle className="w-8 h-8" />,
-                                    title: "Kostenfreie Stornierung",
-                                    desc: "Planänderung? Kein Problem! Bei Transfer511 stornieren Sie kostenfrei – ganz ohne Buchungs- oder Kreditkartengebühren, wenn Sie uns mindestens 4 Stunden vor der Fahrt informieren.",
+                                    title: "Free Cancellation",
+                                    desc: "Cancel for free up to 4 hours before pickup.",
                                 },
                             ].map((item, index) => (
                                 <div key={index} className="flex items-start gap-4">
