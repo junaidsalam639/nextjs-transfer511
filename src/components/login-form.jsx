@@ -10,11 +10,17 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-
 import { useFormik } from "formik"
 import * as Yup from "yup"
+import { toast } from "sonner"
+import { useLoginMutation } from "@/service/authApi"
+import { Loader } from "lucide-react"
+import Cookies from 'js-cookie'
+import { useRouter } from "next/navigation"
 
 export function LoginForm({ className, ...props }) {
+  const [login, { isLoading }] = useLoginMutation();
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -24,8 +30,18 @@ export function LoginForm({ className, ...props }) {
       email: Yup.string().email('Invalid email address').required('Email is required'),
       password: Yup.string().required('Password is required'),
     }),
-    onSubmit: (values) => {
-      console.log("Form Values:", values)
+    onSubmit: async (values) => {
+      try {
+        const response = await login({ ...values }).unwrap();
+        if (response?.status) {
+          toast.success(response?.message || "You are Login successfully");
+          Cookies.set('token', response?.token, { expires: 7 });
+          Cookies.set('user', JSON.stringify(response?.data), { expires: 7 });
+          window.location.href = '/admin-dashboard';
+        }
+      } catch (err) {
+        toast.error(err?.data?.errors || 'Some thing went wrong');
+      }
     }
   });
 
@@ -78,8 +94,15 @@ export function LoginForm({ className, ...props }) {
               </div>
 
               <div className="flex flex-col gap-3">
-                <Button type="submit" className="w-full">
-                  Login
+
+                <Button type="submit" className="w-full" disabled={isLoading}>
+                  {isLoading ? (
+                    <div className="animate-spin">
+                      <Loader />
+                    </div>
+                  ) : (
+                    "Login"
+                  )}
                 </Button>
                 <Button type="button" variant="outline" className="w-full">
                   Login with Google

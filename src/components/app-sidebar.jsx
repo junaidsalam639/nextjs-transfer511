@@ -1,12 +1,14 @@
+"use client"
+
 import * as React from "react"
 import {
   Package,
   Percent,
   LayoutDashboard,
-} from "lucide-react" // Importing icons
-
+} from "lucide-react"
+import { usePathname } from "next/navigation"
+import Link from "next/link"
 import { SearchForm } from "@/components/search-form"
-import { VersionSwitcher } from "@/components/version-switcher"
 import {
   Sidebar,
   SidebarContent,
@@ -19,10 +21,8 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar"
-import Link from "next/link"
 
 const data = {
-  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
   navMain: [
     {
       title: "Admin Dashboard",
@@ -34,7 +34,7 @@ const data = {
           icon: <LayoutDashboard className="w-4 h-4 mr-2" />,
         },
         {
-          title: "Products",
+          title: "Cars",
           url: "/admin-dashboard/products",
           icon: <Package className="w-4 h-4 mr-2" />,
         },
@@ -49,10 +49,11 @@ const data = {
 }
 
 export function AppSidebar({ ...props }) {
+  const pathname = usePathname()
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
-        <VersionSwitcher versions={data.versions} defaultVersion={data.versions[0]} />
         <SearchForm />
       </SidebarHeader>
       <SidebarContent>
@@ -61,20 +62,23 @@ export function AppSidebar({ ...props }) {
             <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {group.items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton
-                      asChild
-                      className="flex items-center gap-2 px-3 py-2 text-sm rounded-md transition-colors hover:bg-muted hover:text-primary"
-                      isActive={item.isActive}
-                    >
-                      <Link href={item.url} className="flex items-center">
-                        {item.icon}
-                        {item.title}
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
+                {group.items.map((item) => {
+                  const isActive = pathname === item.url
+                  return (
+                    <SidebarMenuItem key={item.title}>
+                      <SidebarMenuButton
+                        asChild
+                        className={`flex items-center gap-2 px-3 py-2 text-sm rounded-md transition-colors min-w-8 duration-200 ease-linear
+                          ${isActive ? "bg-primary text-primary-foreground" : "hover:bg-muted hover:text-primary"}`}
+                      >
+                        <Link href={item.url} className="flex items-center">
+                          {item.icon}
+                          {item.title}
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  )
+                })}
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>

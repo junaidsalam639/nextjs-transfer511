@@ -28,13 +28,13 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { useDeleteCarMutation, useGetCarQuery } from "@/service/carApi"
 import { toast } from "sonner"
+import { useDeleteCouponsMutation, useGetCouponsQuery } from "@/service/couponsApi"
 
 
-export function ProductsTable() {
-    const { data, isLoading } = useGetCarQuery();
-    const [deleteCar] = useDeleteCarMutation();
+export function CouponsTable() {
+    const { data, isLoading } = useGetCouponsQuery();
+    const [deleteCoupons] = useDeleteCouponsMutation();
     const [sorting, setSorting] = React.useState([]);
     const [columnFilters, setColumnFilters] = React.useState([]);
     const [columnVisibility, setColumnVisibility] = React.useState({});
@@ -47,47 +47,24 @@ export function ProductsTable() {
             cell: ({ row }) => <div>{row.getValue("id")}</div>,
         },
         {
-            accessorKey: "image",
-            header: "Image",
-            cell: ({ row }) => {
-                const imgSrc = row.getValue("image");
-                return (
-                    <img
-                        src={`https://transfer511.webedevs.com/public/storage/${imgSrc}`}
-                        alt="car"
-                        className="w-14 h-14 object-cover rounded"
-                    />
-                )
-            },
+            accessorKey: "code",
+            header: "Code",
+            cell: ({ row }) => <div>{row.getValue("code")}</div>,
         },
         {
-            accessorKey: "name",
-            header: "Name",
-            cell: ({ row }) => <div>{row.getValue("name")}</div>,
+            accessorKey: "discount_amount",
+            header: "Discount Amount",
+            cell: ({ row }) => <div>{row.getValue("discount_amount")}</div>,
         },
         {
-            accessorKey: "category",
-            header: "Category",
-            cell: ({ row }) => <div>{row.getValue("category")}</div>,
+            accessorKey: "discount_type",
+            header: "Discount Type",
+            cell: ({ row }) => <div>{row.getValue("discount_type")}</div>,
         },
         {
-            accessorKey: "passenger_capacity",
-            header: "Passengers",
-            cell: ({ row }) => <div>{row.getValue("passenger_capacity")}</div>,
-        },
-        {
-            accessorKey: "features",
-            header: "Features",
-            cell: ({ row }) => {
-                const features = row.getValue("features") || [];
-                return (
-                    <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
-                        {features.map((feature, index) => (
-                            <li key={index}>{feature}</li>
-                        ))}
-                    </ul>
-                );
-            },
+            accessorKey: "expiry_date",
+            header: "Expiry Date",
+            cell: ({ row }) => <div>{row.getValue("expiry_date")?.split("T")[0]}</div>,
         },
         {
             id: "actions",
@@ -102,17 +79,17 @@ export function ProductsTable() {
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                            <Link href={`/admin-dashboard/products/edit-products/${car.id}`}>
+                            <Link href={`/admin-dashboard/coupons/edit-coupons/${car.id}`}>
                                 <DropdownMenuItem className="flex items-center gap-2">
                                     <Pencil className="w-4 h-4" />
-                                    Edit Car
+                                    Edit Coupons
                                 </DropdownMenuItem>
                             </Link>
                             <DropdownMenuItem
                                 onClick={async () => {
                                     try {
-                                        await deleteCar(car.id).unwrap();
-                                        toast.success("Car deleted successfully");
+                                        await deleteCoupons(car.id).unwrap();
+                                        toast.success("Coupons deleted successfully");
                                     } catch (error) {
                                         console.error("Failed to delete car:", error);
                                     }
@@ -120,7 +97,7 @@ export function ProductsTable() {
                                 className="flex items-center gap-2 text-red-600 focus:text-red-600"
                             >
                                 <Trash2 className="w-4 h-4" />
-                                Delete Car
+                                Delete Coupons
                             </DropdownMenuItem>
 
                         </DropdownMenuContent>
@@ -154,18 +131,18 @@ export function ProductsTable() {
     return (
         <div className="w-full p-5">
             <div className="flex justify-between mb-4">
-                <h1 className="text-2xl font-bold">Cars</h1>
-                <Link href="/admin-dashboard/products/add-products">
-                    <Button>Add Cars</Button>
+                <h1 className="text-2xl font-bold">Coupons</h1>
+                <Link href="/admin-dashboard/coupons/add-coupons">
+                    <Button>Add Coupons</Button>
                 </Link>
             </div>
 
             <div className="flex items-center py-4 gap-4">
                 <Input
-                    placeholder="Filter by name..."
-                    value={(table.getColumn("name")?.getFilterValue()) ?? ""}
+                    placeholder="Filter by code..."
+                    value={(table.getColumn("code")?.getFilterValue()) ?? ""}
                     onChange={(e) =>
-                        table.getColumn("name")?.setFilterValue(e.target.value)
+                        table.getColumn("code")?.setFilterValue(e.target.value)
                     }
                     className="max-w-sm"
                 />
