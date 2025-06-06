@@ -1,14 +1,14 @@
-"use client"
-import { store } from "@/redux/store";
-import { Provider } from "react-redux";
+'use client'
+import { persistor, store } from '@/redux/store';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
-function ReduxProvider({ children }) {
+export default function ReduxProvider({ children }) {
     return (
         <Provider store={store}>
-            {children}
+            <PersistGate loading={null} persistor={persistor}>
+                {children}
+            </PersistGate>
         </Provider>
     );
 }
-
-export default ReduxProvider;
-
