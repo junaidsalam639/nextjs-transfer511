@@ -83,7 +83,7 @@ function ContactForm() {
                                     <div>
                                         <Textarea placeholder="Write A Message" rows={5} />
                                     </div>
-                                    <Button className="bg-primary hover:bg-primary/90 text-white w-full md:w-auto">
+                                    <Button>
                                         Get In Touch <ArrowRight className="ml-2 h-4 w-4" />
                                     </Button>
                                 </form>

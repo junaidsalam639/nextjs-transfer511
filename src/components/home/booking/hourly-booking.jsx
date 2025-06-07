@@ -11,6 +11,7 @@ import { useAddHourlyBookingMutation } from '@/service/bookingApi';
 import { setBookingData } from '@/redux/bookingSlice';
 import { useDispatch } from 'react-redux';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 const validationSchema = Yup.object().shape({
     startAddress: Yup.string().required("Pickup address is required"),
@@ -20,6 +21,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const HourlyBooking = () => {
+    const router = useRouter();
     const dispatch = useDispatch();
     const [addHourlyBooking, { isLoading }] = useAddHourlyBookingMutation();
     const [startAutocomplete, setStartAutocomplete] = useState(null);
@@ -47,6 +49,7 @@ const HourlyBooking = () => {
                         ...response?.data,
                         startCoords,
                     }));
+                    router.push("/trip-details");
                 }
             } catch (err) {
                 console.error(err);
@@ -148,7 +151,7 @@ const HourlyBooking = () => {
             </div>
 
             <div className="md:col-span-4 col-span-1 flex items-end">
-                <Button type="submit" className="bg-zinc-900 hover:bg-orange-500 text-white w-full md:w-auto" disabled={isLoading}>
+                <Button type="submit" className="bg-zinc-900 hover:bg-orange-500 text-white w-full" disabled={isLoading}>
                     {isLoading ? (
                         <div className="animate-spin">
                             <Loader />

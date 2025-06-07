@@ -11,8 +11,10 @@ import { useAddMileageBookingMutation } from '@/service/bookingApi';
 import { toast } from 'sonner';
 import { useDispatch } from 'react-redux';
 import { setBookingData } from '@/redux/bookingSlice';
+import { useRouter } from 'next/navigation';
 
 const MileageBooking = () => {
+    const router = useRouter();
     const dispatch = useDispatch();
     const [addMileageBooking, { isLoading }] = useAddMileageBookingMutation();
     const [startAutocomplete, setStartAutocomplete] = useState(null);
@@ -87,6 +89,7 @@ const MileageBooking = () => {
                     startCoords,
                     endCoords
                 }));
+                router.push("/trip-details");
             }
         } catch (err) {
             console.error(err);
@@ -181,7 +184,7 @@ const MileageBooking = () => {
                                 <SelectValue placeholder="Select trip type" />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="one-way">One Way</SelectItem>
+                                <SelectItem value="oneway">One Way</SelectItem>
                                 <SelectItem value="return">Return</SelectItem>
                             </SelectContent>
                         </Select>
@@ -226,7 +229,7 @@ const MileageBooking = () => {
                     )}
 
                     <div className="md:col-span-6 flex justify-end">
-                        <Button type="submit" className="bg-zinc-900 hover:bg-orange-500 text-white w-full md:w-auto" disabled={isLoading}>
+                        <Button type="submit" className="bg-zinc-900 hover:bg-orange-500 text-white w-full" disabled={isLoading}>
                             {isLoading ? (
                                 <div className="animate-spin">
                                     <Loader />

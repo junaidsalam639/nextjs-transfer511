@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { GoogleMap, Marker, DirectionsRenderer } from '@react-google-maps/api';
+import { GoogleMap, Marker } from '@react-google-maps/api';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -8,14 +8,13 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/componen
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Loader2 } from 'lucide-react';
-import { carData } from '@/lib/car-data';
 
 const containerStyle = {
   width: '100%',
   height: '100%',
 };
 
-const TripDetailSection = ({ data }) => {
+const TripDetailSection = ({ carData, bookingData }) => {
   const router = useRouter();
   const [mapsLoaded, setMapsLoaded] = React.useState(false);
 
@@ -25,7 +24,7 @@ const TripDetailSection = ({ data }) => {
     }
   }, []);
 
-  if (!data) {
+  if (!carData) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[50vh] gap-4">
         <Card className="w-full max-w-md text-center">
@@ -45,18 +44,6 @@ const TripDetailSection = ({ data }) => {
     );
   }
 
-  const {
-    startAddress,
-    endAddress,
-    startCoords,
-    endCoords,
-    distance,
-    pricePerKm,
-    totalPrice,
-    directions,
-  } = data;
-
-
 
   return (
     <div className="space-y-8 py-20">
@@ -66,36 +53,29 @@ const TripDetailSection = ({ data }) => {
             <Card key={idx} className="hover:shadow-lg transition-shadow pt-0 pb-5">
               <CardContent className="p-0">
                 <img
-                  src={car.image}
-                  alt={car.title}
+                  src={`https://transfer511.webedevs.com/public/storage/${car?.image}`}
+                  alt={car?.title}
                   className="w-full h-48 object-cover rounded-t-lg"
                 />
                 <div className="p-6">
-                  <CardTitle className="text-xl mb-3">{car.title}</CardTitle>
+                  <CardTitle className="text-xl mb-3">{car?.category}</CardTitle>
+                  <CardTitle className="text-md mb-3">{car?.name}</CardTitle>
                   <ul className="text-sm text-muted-foreground space-y-2 mb-4">
-                    <li className="flex items-center gap-2">
-                      <span>✓</span> 60 min Wartezeit (Flughafen)
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span>✓</span> 15 min für andere Abholungen
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span>✓</span> Kostenlose Stornierung (24h vorher)
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span>✓</span> Gratis WLAN & Wasser
-                    </li>
+                    {car?.features?.map((fea) => (
+                      <li className="flex items-center gap-2">
+                        <span>✓</span> {fea}
+                      </li>
+                    ))}
                   </ul>
-                  <div className="flex justify-between text-sm mb-4">
-                    <Badge variant="secondary">🧑‍🤝‍🧑 {car.seats} Sitze</Badge>
-                    <Badge variant="secondary">🧳 {car.bags} Gepäck</Badge>
+                  <div className="flex justify-between text-sm">
+                    <Badge variant="secondary">🧑‍🤝‍🧑 {car?.passenger_capacity} Passenger</Badge>
                   </div>
                 </div>
               </CardContent>
               <CardFooter className="flex flex-col gap-3">
-                <p className="text-xl font-bold text-orange-500 w-full text-right">€{car.price}</p>
+                <p className="text-xl font-bold text-orange-500 w-full text-right">€{bookingData[car?.category]?.price}</p>
                 <Button asChild className="w-full bg-orange-500 hover:bg-orange-600">
-                  <Link href={car.link}>Weiter</Link>
+                  <Link href={`/checkout/${car?.id}`}>Further</Link>
                 </Button>
               </CardFooter>
             </Card>
@@ -105,28 +85,29 @@ const TripDetailSection = ({ data }) => {
         <div className="grid lg:grid-cols-2 gap-8">
           <Card>
             <CardHeader>
-              <CardTitle>Fahrtübersicht</CardTitle>
+              <CardTitle>Trip Details</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Start:</span>
-                <span className="font-medium">{startAddress}</span>
+                <span className="font-medium">{bookingData?.from}</span>
               </div>
               <Separator />
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Ziel:</span>
-                <span className="font-medium">{endAddress}</span>
+                <span className="text-muted-foreground">Goal:</span>
+                <span className="font-medium">{bookingData?.to}</span>
               </div>
               <Separator />
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Distanz:</span>
-                <span>{distance} km</span>
+                <span className="text-muted-foreground">Distance:</span>
+                <span>{bookingData?.distance_km} km</span>
               </div>
               <Separator />
-              <div className="flex justify-between text-lg font-bold text-orange-600">
-                <span>Gesamtpreis:</span>
-                <span>€{totalPrice}</span>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Transfer Time:</span>
+                <span>{bookingData?.estimated_travel_time}</span>
               </div>
+              <Separator />
             </CardContent>
           </Card>
 
@@ -135,17 +116,13 @@ const TripDetailSection = ({ data }) => {
               {mapsLoaded ? (
                 <GoogleMap
                   mapContainerStyle={containerStyle}
-                  center={startCoords}
+                  center={bookingData?.startCoords}
                   zoom={7}
                 >
-                  {directions ? (
-                    <DirectionsRenderer directions={directions} />
-                  ) : (
-                    <>
-                      <Marker position={startCoords} label="A" />
-                      <Marker position={endCoords} label="B" />
-                    </>
-                  )}
+                  <>
+                    <Marker position={bookingData?.startCoords} label="A" />
+                    <Marker position={bookingData?.endCoords} label="B" />
+                  </>
                 </GoogleMap>
               ) : (
                 <div className="h-full w-full flex items-center justify-center">
