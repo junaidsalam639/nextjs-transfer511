@@ -5,6 +5,7 @@ import {
   Package,
   Percent,
   LayoutDashboard,
+  BookIcon,
 } from "lucide-react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
@@ -42,6 +43,11 @@ const data = {
           title: "Coupons",
           url: "/admin-dashboard/coupons",
           icon: <Percent className="w-4 h-4 mr-2" />,
+        },
+        {
+          title: "Booking",
+          url: "/admin-dashboard/booking",
+          icon: <BookIcon className="w-4 h-4 mr-2" />,
         },
       ],
     },

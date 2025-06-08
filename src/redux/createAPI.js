@@ -10,7 +10,7 @@ export const transferAPI = createApi({
             'Authorization': `Bearer ${Cookies.get('token') || ""}`,
         }
     }),
-    tagTypes: ["cars", "coupons"],
+    tagTypes: ["cars", "coupons", "booking"],
     endpoints: () => ({}),
 });
 

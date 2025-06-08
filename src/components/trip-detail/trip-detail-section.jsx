@@ -8,15 +8,22 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/componen
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Loader2 } from 'lucide-react';
+import { useGetCarQuery } from '@/service/carApi';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSelectCarData } from '@/redux/selectCarSlice';
 
 const containerStyle = {
   width: '100%',
   height: '100%',
 };
 
-const TripDetailSection = ({ carData, bookingData }) => {
+const TripDetailSection = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [mapsLoaded, setMapsLoaded] = React.useState(false);
+  const { data, isLoading } = useGetCarQuery();
+  const { booking } = useSelector((state) => state);
+  const carData = data?.data;
 
   React.useEffect(() => {
     if (typeof window !== 'undefined' && window.google) {
@@ -24,26 +31,12 @@ const TripDetailSection = ({ carData, bookingData }) => {
     }
   }, []);
 
-  if (!carData) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[50vh] gap-4">
-        <Card className="w-full max-w-md text-center">
-          <CardHeader>
-            <CardTitle className="text-red-600">Kein Fahrtdaten gefunden</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground">Es wurden keine Fahrtdaten gefunden.</p>
-          </CardContent>
-          <CardFooter className="flex justify-center">
-            <Button onClick={() => router.push('/')} className="bg-orange-500 hover:bg-orange-600">
-              Zurück zur Startseite
-            </Button>
-          </CardFooter>
-        </Card>
-      </div>
-    );
+  const handlerFurther = (car) => {
+    dispatch(setSelectCarData(car));
+    router.push(`/checkout/${car?.id}`);
   }
 
+  if (isLoading) return <> loading... </>
 
   return (
     <div className="space-y-8 py-20">
@@ -61,8 +54,8 @@ const TripDetailSection = ({ carData, bookingData }) => {
                   <CardTitle className="text-xl mb-3">{car?.category}</CardTitle>
                   <CardTitle className="text-md mb-3">{car?.name}</CardTitle>
                   <ul className="text-sm text-muted-foreground space-y-2 mb-4">
-                    {car?.features?.map((fea) => (
-                      <li className="flex items-center gap-2">
+                    {car?.features?.map((fea, idx) => (
+                      <li className="flex items-center gap-2" key={idx}>
                         <span>✓</span> {fea}
                       </li>
                     ))}
@@ -73,9 +66,11 @@ const TripDetailSection = ({ carData, bookingData }) => {
                 </div>
               </CardContent>
               <CardFooter className="flex flex-col gap-3">
-                <p className="text-xl font-bold text-orange-500 w-full text-right">€{bookingData[car?.category]?.price}</p>
-                <Button asChild className="w-full bg-orange-500 hover:bg-orange-600">
-                  <Link href={`/checkout/${car?.id}`}>Further</Link>
+                <p className="text-xl font-bold text-orange-500 w-full text-right">€{booking[car?.category]?.price}</p>
+                <Button
+                  onClick={() => handlerFurther({ ...car, price: booking[car?.category]?.price })}
+                  className="w-full bg-orange-500 hover:bg-orange-600">
+                  Further
                 </Button>
               </CardFooter>
             </Card>
@@ -87,41 +82,41 @@ const TripDetailSection = ({ carData, bookingData }) => {
             <CardHeader>
               <CardTitle>Trip Details</CardTitle>
             </CardHeader>
+            <Separator />
             <CardContent className="space-y-4">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Start:</span>
-                <span className="font-medium">{bookingData?.from}</span>
+                <span className="font-medium">{booking?.from}</span>
               </div>
               <Separator />
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Goal:</span>
-                <span className="font-medium">{bookingData?.to}</span>
+                <span className="font-medium">{booking?.to}</span>
               </div>
               <Separator />
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Distance:</span>
-                <span>{bookingData?.distance_km} km</span>
+                <span>{booking?.distance_km} km</span>
               </div>
               <Separator />
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Transfer Time:</span>
-                <span>{bookingData?.estimated_travel_time}</span>
+                <span>{booking?.estimated_travel_time}</span>
               </div>
-              <Separator />
             </CardContent>
           </Card>
 
-          <Card className="h-full">
+          <Card className="h-full py-0">
             <CardContent className="p-0 h-80">
               {mapsLoaded ? (
                 <GoogleMap
                   mapContainerStyle={containerStyle}
-                  center={bookingData?.startCoords}
+                  center={booking?.startCoords}
                   zoom={7}
                 >
                   <>
-                    <Marker position={bookingData?.startCoords} label="A" />
-                    <Marker position={bookingData?.endCoords} label="B" />
+                    <Marker position={booking?.startCoords} label="A" />
+                    <Marker position={booking?.endCoords} label="B" />
                   </>
                 </GoogleMap>
               ) : (
@@ -132,10 +127,10 @@ const TripDetailSection = ({ carData, bookingData }) => {
             </CardContent>
           </Card>
         </div>
-
       </div>
     </div>
   );
 };
 
 export default TripDetailSection;
+

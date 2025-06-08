@@ -87,7 +87,12 @@ const MileageBooking = () => {
                 dispatch(setBookingData({
                     ...response?.data,
                     startCoords,
-                    endCoords
+                    endCoords,
+                    pickup_date: values?.pickupDate,
+                    pickup_time: values?.pickupTime,
+                    dropoff_date: values?.dropoff_date,
+                    dropoff_time: values?.dropoff_time,
+                    booking_type: "mileage",
                 }));
                 router.push("/trip-details");
             }

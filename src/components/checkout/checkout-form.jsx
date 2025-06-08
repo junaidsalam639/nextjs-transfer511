@@ -1,21 +1,39 @@
 "use client";
-import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import Image from "next/image";
-import { Badge } from "../ui/badge";
 import { Textarea } from "../ui/textarea";
+import CheckoutCarCard from "./checkout-car-card";
+import CheckoutCoupon from "./checkout-coupon";
+import { useSelector } from "react-redux";
+import CheckoutTripDetails from "./checkout-trip-details";
+import { useState } from "react";
+import { Loader } from "lucide-react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
-function CheckoutForm({ data }) {
-    const [showCouponField, setShowCouponField] = useState(false);
+const baseUrl = "https://transfer511.webedevs.com/public/api";
+
+function CheckoutForm() {
+    const router = useRouter();
+    const { selectCar } = useSelector((state) => state);
+    const { booking } = useSelector((state) => state);
+    const [btnLoader, setBtnLoader] = useState(false);
+    const [couponData, setCouponData] = useState({
+        id: "",
+        price: selectCar?.price
+    });
+
+    console.log({
+        booking,
+        selectCar,
+        couponData
+    })
 
     const formik = useFormik({
         initialValues: {
@@ -27,9 +45,7 @@ function CheckoutForm({ data }) {
             passengers: "",
             luggage: "",
             notes: "",
-            couponCode: "",
             agreeTerms: false,
-            paymentMethod: "cash",
         },
         validationSchema: Yup.object({
             firstName: Yup.string().required("First name is required"),
@@ -40,11 +56,61 @@ function CheckoutForm({ data }) {
             passengers: Yup.string().required("Number of passengers is required"),
             luggage: Yup.string().required("Luggage info is required"),
             notes: Yup.string().required("Order notes are required"),
-            paymentMethod: Yup.string().required("Select a payment method"),
             agreeTerms: Yup.boolean().oneOf([true], "You must accept terms"),
         }),
-        onSubmit: (values) => {
-            console.log("Form Submitted:", values);
+        onSubmit: async (values) => {
+            setBtnLoader(true);
+            const formData = new FormData();
+            formData.append("from_location", booking?.from);
+            formData.append("to_location", booking?.to);
+            formData.append("pickup_date", booking?.pickup_date);
+            formData.append("pickup_time", booking?.pickup_time);
+            formData.append("trip_type", booking?.trip_type);
+            formData.append("booking_type", booking?.booking_type);
+            formData.append("estimated_travel_time", booking?.estimated_travel_time);
+            formData.append("distance_km", booking?.distance_km);
+            formData.append("rate_per_km", booking[selectCar?.category]?.rate_per_km);
+
+            if (booking?.trip_type === "return") {
+                formData.append("dropoff_date", booking?.dropoff_date);
+                formData.append("dropoff_time", booking?.dropoff_time);
+            }
+
+            formData.append("first_name", values?.firstName);
+            formData.append("last_name", values?.lastName);
+            formData.append("phone", values?.phone);
+            formData.append("email", values?.email);
+
+            formData.append("product_category_id", selectCar?.id);
+            formData.append("category", selectCar?.category);
+            formData.append("price", selectCar?.price);
+
+            if (couponData?.id) {
+                formData.append("coupon_id", couponData?.id);
+                formData.append("price_after_coupon", couponData?.price);
+            }
+
+            try {
+                const response = await fetch(`${baseUrl}/user/bookings`, {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json',
+                    }
+                });
+                const result = await response.json();
+                if (response.ok) {
+                    toast.success(result?.message || "Booking successful");
+                    setBtnLoader(false);
+                    router.push("/");
+                } else {
+                    toast.error(result?.errors || "Something went wrong");
+                    setBtnLoader(false);
+                }
+            } catch (err) {
+                toast.error("Network error or server not responding");
+                setBtnLoader(false);
+            }
         },
     });
 
@@ -65,57 +131,13 @@ function CheckoutForm({ data }) {
                 </div>
             </div>
 
-            <Card className="mb-6">
-                <CardContent className="px-4 flex justify-between items-center">
-                    <div className="flex items-center gap-4">
-                        <Image
-                            src={data?.image}
-                            alt="car"
-                            width={100}
-                            height={100}
-                            className="w-28 h-24 object-cover rounded"
-                        />
-                        <div>
-                            <h2 className="font-semibold text-lg">{data?.title}</h2>
-                            <div className="text-sm text-muted-foreground flex items-center gap-3">
-                                <Badge variant="secondary">🧑‍🤝‍🧑 {data?.seats} Seats</Badge>
-                                <Badge variant="secondary">🧳 {data?.bags} Bags</Badge>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="text-right">
-                        <h2 className="text-xl font-bold">€ {data?.price}</h2>
-                    </div>
-                </CardContent>
-            </Card>
+            <CheckoutCarCard selectCar={selectCar} />
+            <CheckoutTripDetails booking={booking} />
+            <CheckoutCoupon
+                price={selectCar?.price}
+                setCouponData={setCouponData}
+            />
 
-            <div className="space-y-4 mb-6">
-                <Card className="bg-secondary">
-                    <CardContent className="p-3">
-                        <div className="flex items-center mb-3">
-                            <Checkbox
-                                id="coupon"
-                                className="mr-2 cursor-pointer"
-                                checked={showCouponField}
-                                onCheckedChange={() => setShowCouponField(!showCouponField)}
-                            />
-                            <Label htmlFor="coupon" className="text-sm">
-                                Have a coupon code?
-                            </Label>
-                        </div>
-                        {showCouponField && (
-                            <>
-                                <Input
-                                    name="couponCode"
-                                    placeholder="Enter coupon code"
-                                    value={formik.values.couponCode}
-                                    onChange={formik.handleChange}
-                                />
-                            </>
-                        )}
-                    </CardContent>
-                </Card>
-            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <Card>
@@ -228,45 +250,14 @@ function CheckoutForm({ data }) {
                                 <TableCell className="py-2">Product</TableCell>
                                 <TableCell className="py-2 text-right font-semibold">Subtotal</TableCell>
                             </TableRow>
-                            <TableRow className="border-t">
-                                <TableCell className="py-2">Transfer</TableCell>
-                                <TableCell className="py-2 text-right">€112.84</TableCell>
-                            </TableRow>
                             <TableRow className="border-t font-medium">
                                 <TableCell className="py-2">Total</TableCell>
                                 <TableCell className="py-2 text-right font-bold">
-                                    €112.84 <span className="text-xs text-muted-foreground">(incl. €18.02 VAT)</span>
+                                    € {couponData?.price}
                                 </TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
-                </CardContent>
-            </Card>
-
-            <Card className="mb-6">
-                <CardHeader>
-                    <CardTitle className="text-lg">Payment Methods</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                    <RadioGroup
-                        defaultValue="cash"
-                        onValueChange={(value) => formik.setFieldValue("paymentMethod", value)}
-                        onBlur={() => formik.setTouched({ ...formik.touched, paymentMethod: true })}
-                    >
-                        <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="cash" id="cash" />
-                            <Label htmlFor="cash">Cash Payment</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="paypal" id="paypal" />
-                            <Label htmlFor="paypal">PayPal</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="credit" id="credit" />
-                            <Label htmlFor="credit">Credit Card (Stripe)</Label>
-                        </div>
-                    </RadioGroup>
-                    {renderError("paymentMethod")}
                 </CardContent>
             </Card>
 
@@ -285,8 +276,14 @@ function CheckoutForm({ data }) {
             </div>
             {renderError("agreeTerms")}
 
-            <Button type="submit" className="w-full bg-zinc-900 hover:bg-orange-500 text-white">
-                Place Order
+            <Button disabled={btnLoader} type="submit" className="w-full bg-zinc-900 hover:bg-orange-500 text-white">
+                {btnLoader ? (
+                    <div className="animate-spin">
+                        <Loader />
+                    </div>
+                ) : (
+                    "Place Order"
+                )}
             </Button>
         </form>
     );

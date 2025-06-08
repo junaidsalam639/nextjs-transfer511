@@ -2,6 +2,25 @@ import { transferAPI } from "@/redux/createAPI";
 
 const bookingApi = transferAPI.injectEndpoints({
     endpoints: (build) => ({
+        getBooking: build.query({
+            query: () => `admin/bookings`,
+            providesTags: ["booking"]
+        }),
+        changeBookingStatus: build.mutation({
+            query: ({ status, id }) => {
+                const formData = new FormData();
+                formData.append("_method", "PUT");
+                formData.append("status", status);
+
+                return {
+                    url: `admin/bookings/${id}`,
+                    method: "POST",
+                    body: formData,
+                    formData: true,
+                };
+            },
+            invalidatesTags: ["booking"],
+        }),
         addMileageBooking: build.mutation({
             query: (formValues) => {
                 const formData = new FormData();
@@ -10,12 +29,13 @@ const bookingApi = transferAPI.injectEndpoints({
                 formData.append("pickup_date", formValues.pickupDate);
                 formData.append("pickup_time", formValues.pickupTime);
                 formData.append("trip_type", formValues.tripType);
-                if (formValues?.dropoff_date && formValues?.dropoff_time) {
-                    formData.append("dropoff_date", formValues.dropoff_date);
-                    formData.append("dropoff_time", formValues.dropoff_time);
+
+                if (formValues.tripType === "return") {
+                    formData.append("dropoff_date", values?.dropoff_date);
+                    formData.append("dropoff_time", values?.dropoff_time);
                 }
                 return {
-                    url: "admin/mileage/booking",
+                    url: "user/mileage/booking",
                     method: "POST",
                     body: formData,
                     formData: true,
@@ -32,7 +52,7 @@ const bookingApi = transferAPI.injectEndpoints({
                 formData.append("duration", formValues.hours);
 
                 return {
-                    url: "admin/hourly/booking",
+                    url: "user/hourly/booking",
                     method: "POST",
                     body: formData,
                     formData: true,
@@ -44,5 +64,7 @@ const bookingApi = transferAPI.injectEndpoints({
 
 export const {
     useAddHourlyBookingMutation,
-    useAddMileageBookingMutation
+    useAddMileageBookingMutation,
+    useGetBookingQuery,
+    useChangeBookingStatusMutation,
 } = bookingApi;
