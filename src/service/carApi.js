@@ -59,7 +59,6 @@ const carApi = transferAPI.injectEndpoints({
             }),
             invalidatesTags: ["cars"]
         }),
-
     }),
 });
 

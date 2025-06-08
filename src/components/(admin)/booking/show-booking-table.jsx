@@ -177,11 +177,13 @@ export function ShowBookingTable() {
   if (isLoading) return <>Loading...</>;
 
   return (
-    <div className="w-full p-5">
+
+    <div className="w-full p-4">
       <h1 className="text-2xl font-bold mb-4">All Bookings (Full Data)</h1>
 
-      <div className="overflow-x-auto rounded-md border w-[1140px]">
-        <Table>
+      {/* Responsive Table Wrapper */}
+      <div className="w-full overflow-x-auto rounded-md border">
+        <Table className="min-w-[800px] w-full">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -214,10 +216,8 @@ export function ShowBookingTable() {
           </TableBody>
         </Table>
       </div>
-
-      <div className="w-full px-4 py-4 flex justify-between items-center flex-wrap gap-2 overflow-x-auto">
+      <div className="w-full px-2 py-4 flex justify-between items-center flex-wrap gap-2">
         <Button
-          className="flex-shrink-0"
           variant="outline"
           size="sm"
           onClick={() => table.previousPage()}
@@ -226,7 +226,6 @@ export function ShowBookingTable() {
           Previous
         </Button>
         <Button
-          className="flex-shrink-0"
           variant="outline"
           size="sm"
           onClick={() => table.nextPage()}
@@ -235,7 +234,6 @@ export function ShowBookingTable() {
           Next
         </Button>
       </div>
-
     </div>
   );
 }
