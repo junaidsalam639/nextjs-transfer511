@@ -180,10 +180,8 @@ export function ShowBookingTable() {
 
     <div className="w-full p-4">
       <h1 className="text-2xl font-bold mb-4">All Bookings (Full Data)</h1>
-
-      {/* Responsive Table Wrapper */}
-      <div className="w-full overflow-x-auto rounded-md border">
-        <Table className="min-w-[800px] w-full">
+      <div className="max-w-[1140px] overflow-x-auto rounded-md border">
+        <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>

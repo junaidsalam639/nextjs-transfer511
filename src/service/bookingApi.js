@@ -31,8 +31,8 @@ const bookingApi = transferAPI.injectEndpoints({
                 formData.append("trip_type", formValues.tripType);
 
                 if (formValues.tripType === "return") {
-                    formData.append("dropoff_date", values?.dropoff_date);
-                    formData.append("dropoff_time", values?.dropoff_time);
+                    formData.append("dropoff_date", formValues?.dropoff_date);
+                    formData.append("dropoff_time", formValues?.dropoff_time);
                 }
                 return {
                     url: "user/mileage/booking",
