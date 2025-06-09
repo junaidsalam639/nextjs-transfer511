@@ -21,6 +21,7 @@ const CheckoutCoupon = ({ price, setCouponData }) => {
             if (response?.status) {
                 toast.success(response?.message || "Apply Coupen successfully");
                 setCouponData(response?.data);
+                setCouponCode("");
             }
         } catch (err) {
             toast.error(err?.data?.message || 'Some thing went wrong');
