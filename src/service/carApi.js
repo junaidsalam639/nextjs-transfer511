@@ -59,7 +59,17 @@ const carApi = transferAPI.injectEndpoints({
             }),
             invalidatesTags: ["cars"]
         }),
+        getUserCar: build.query({
+            query: () => `user/view/all/cars`,
+        }),
     }),
 });
 
-export const { useAddCarMutation, useGetCarQuery, useGetCarSingleQuery, useEditCarMutation, useDeleteCarMutation } = carApi;
+export const {
+    useAddCarMutation,
+    useGetCarQuery,
+    useGetCarSingleQuery,
+    useEditCarMutation,
+    useDeleteCarMutation,
+    useGetUserCarQuery
+} = carApi;

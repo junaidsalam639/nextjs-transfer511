@@ -2,13 +2,12 @@
 import React from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Loader2 } from 'lucide-react';
-import { useGetCarQuery } from '@/service/carApi';
+import { useGetUserCarQuery } from '@/service/carApi';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectCarData } from '@/redux/selectCarSlice';
 
@@ -21,7 +20,7 @@ const TripDetailSection = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [mapsLoaded, setMapsLoaded] = React.useState(false);
-  const { data, isLoading } = useGetCarQuery();
+  const { data, isLoading } = useGetUserCarQuery();
   const { booking } = useSelector((state) => state);
   const carData = data?.data;
 
