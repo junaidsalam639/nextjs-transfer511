@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from 'react';
 import MileageBooking from './booking/mileage-booking';
-import HourlyBooking from './booking/hourly-booking';
 
 function HomeHero() {
     const [tabs, setTabs] = useState("mileage");
@@ -21,12 +20,11 @@ function HomeHero() {
                             className={`${tabs === "mileage" ? "bg-orange-500" : "bg-black"} text-sm py-3 px-4 w-40 cursor-pointer rounded text-white`}
                             onClick={() => setTabs("mileage")}>Mileage Booking</button>
                         <button
-                            className={`${tabs === "hourly" ? "bg-orange-500" : "bg-black"} text-sm py-3 px-4 w-40 cursor-pointer rounded text-white`}
-                            onClick={() => setTabs("hourly")}>Hourly Booking</button>
+                            className={`${tabs === "return" ? "bg-orange-500" : "bg-black"} text-sm py-3 px-4 w-40 cursor-pointer rounded text-white`}
+                            onClick={() => setTabs("return")}>Return Booking</button>
                     </div>
 
-                    {tabs === "mileage" && <MileageBooking />}
-                    {tabs === "hourly" && <HourlyBooking />}
+                    <MileageBooking tabs={tabs} />
                 </div>
 
             </div>

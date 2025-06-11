@@ -28,9 +28,9 @@ const bookingApi = transferAPI.injectEndpoints({
                 formData.append("to_location", formValues.endAddress);
                 formData.append("pickup_date", formValues.pickupDate);
                 formData.append("pickup_time", formValues.pickupTime);
-                formData.append("trip_type", formValues.tripType);
+                formData.append("trip_type", formValues?.tabs === "return" ? "return" : "oneway");
 
-                if (formValues.tripType === "return") {
+                if (formValues?.tabs === "return") {
                     formData.append("dropoff_date", formValues?.dropoff_date);
                     formData.append("dropoff_time", formValues?.dropoff_time);
                 }
@@ -42,28 +42,10 @@ const bookingApi = transferAPI.injectEndpoints({
                 };
             },
         }),
-        addHourlyBooking: build.mutation({
-            query: (formValues) => {
-                console.log(formValues, 'formValues')
-                const formData = new FormData();
-                formData.append("start", formValues.startAddress);
-                formData.append("pickup_date", formValues.pickupDate);
-                formData.append("pickup_time", formValues.pickupTime);
-                formData.append("duration", formValues.hours);
-
-                return {
-                    url: "user/hourly/booking",
-                    method: "POST",
-                    body: formData,
-                    formData: true,
-                };
-            },
-        }),
     }),
 });
 
 export const {
-    useAddHourlyBookingMutation,
     useAddMileageBookingMutation,
     useGetBookingQuery,
     useChangeBookingStatusMutation,

@@ -12,12 +12,12 @@ const CheckoutTripDetails = ({ booking }) => {
                 <Separator />
                 <CardContent className="space-y-4">
                     <div className="flex justify-between">
-                        <span className="text-muted-foreground">Start:</span>
+                        <span className="text-muted-foreground">Pickup Address:</span>
                         <span className="font-medium">{booking?.from}</span>
                     </div>
                     <Separator />
                     <div className="flex justify-between">
-                        <span className="text-muted-foreground">Goal:</span>
+                        <span className="text-muted-foreground">Destination Address:</span>
                         <span className="font-medium">{booking?.to}</span>
                     </div>
                     <Separator />
@@ -27,7 +27,12 @@ const CheckoutTripDetails = ({ booking }) => {
                     </div>
                     <Separator />
                     <div className="flex justify-between">
-                        <span className="text-muted-foreground">Transfer Time:</span>
+                        <span className="text-muted-foreground">Pickup Date:</span>
+                        <span>{booking?.pickup_date}</span>
+                    </div>
+                    <Separator />
+                    <div className="flex justify-between">
+                        <span className="text-muted-foreground">Pickup Time:</span>
                         <span>{booking?.estimated_travel_time}</span>
                     </div>
                 </CardContent>

@@ -10,17 +10,19 @@ import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Textarea } from "../ui/textarea";
 import CheckoutCarCard from "./checkout-car-card";
 import CheckoutCoupon from "./checkout-coupon";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CheckoutTripDetails from "./checkout-trip-details";
 import { useState } from "react";
 import { Loader } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { setSuccessBookingData } from "@/redux/successBookingSlice";
 
 const baseUrl = "https://transfer511.webedevs.com/public/api";
 
 function CheckoutForm() {
     const router = useRouter();
+    const dispatch = useDispatch();
     const { selectCar } = useSelector((state) => state);
     const { booking } = useSelector((state) => state);
     const [btnLoader, setBtnLoader] = useState(false);
@@ -28,12 +30,6 @@ function CheckoutForm() {
         id: "",
         price: selectCar?.price
     });
-
-    console.log({
-        booking,
-        selectCar,
-        couponData
-    })
 
     const formik = useFormik({
         initialValues: {
@@ -100,9 +96,10 @@ function CheckoutForm() {
                 });
                 const result = await response.json();
                 if (response.ok) {
+                    dispatch(setSuccessBookingData(result?.data));
                     toast.success(result?.message || "Booking successful");
                     setBtnLoader(false);
-                    router.push("/");
+                    router.push("/booking-succes");
                 } else {
                     toast.error(result?.errors || "Something went wrong");
                     setBtnLoader(false);

@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux';
 import { setBookingData } from '@/redux/bookingSlice';
 import { useRouter } from 'next/navigation';
 
-const MileageBooking = () => {
+const MileageBooking = ({ tabs }) => {
     const router = useRouter();
     const dispatch = useDispatch();
     const [addMileageBooking, { isLoading }] = useAddMileageBookingMutation();
@@ -38,16 +38,8 @@ const MileageBooking = () => {
         pickupDate: Yup.string().required('Pickup date is required'),
         pickupTime: Yup.string().required('Pickup time is required'),
         tripType: Yup.string().required(),
-        dropoff_date: Yup.string().when('tripType', (tripType, schema) =>
-            tripType === 'return'
-                ? schema.required('Dropoff date is required')
-                : schema
-        ),
-        dropoff_time: Yup.string().when('tripType', (tripType, schema) =>
-            tripType === 'return'
-                ? schema.required('Dropoff time is required')
-                : schema
-        ),
+        dropoff_date: tabs === 'return' && Yup.string().required('Dropoff date is required'),
+        dropoff_time: tabs === 'return' && Yup.string().required('Dropoff time is required'),
     });
 
     const handleStartPlaceSelected = () => {
@@ -79,6 +71,7 @@ const MileageBooking = () => {
             ...values,
             startCoords,
             endCoords,
+            tabs,
         };
         try {
             const response = await addMileageBooking(formData).unwrap();
@@ -109,8 +102,8 @@ const MileageBooking = () => {
             onSubmit={handleSubmit}
         >
             {({ values, handleChange, errors, touched }) => (
-                <Form className="grid grid-cols-1 md:grid-cols-6 gap-4 mt-4">
-                    <Autocomplete className="md:col-span-3" onLoad={setStartAutocomplete} onPlaceChanged={handleStartPlaceSelected}>
+                <Form className="grid grid-cols-1 md:grid-cols-12 gap-4 mt-4">
+                    <Autocomplete className="md:col-span-6" onLoad={setStartAutocomplete} onPlaceChanged={handleStartPlaceSelected}>
                         <div>
                             <label className="block text-sm font-medium mb-1">Pickup Address</label>
                             <div className="relative">
@@ -129,7 +122,7 @@ const MileageBooking = () => {
                         </div>
                     </Autocomplete>
 
-                    <Autocomplete className="md:col-span-3" onLoad={setEndAutocomplete} onPlaceChanged={handleEndPlaceSelected}>
+                    <Autocomplete className="md:col-span-6" onLoad={setEndAutocomplete} onPlaceChanged={handleEndPlaceSelected}>
                         <div>
                             <label className="block text-sm font-medium mb-1">Destination Address</label>
                             <div className="relative">
@@ -148,7 +141,7 @@ const MileageBooking = () => {
                         </div>
                     </Autocomplete>
 
-                    <div className="md:col-span-2">
+                    <div className="md:col-span-6">
                         <label className="block text-sm font-medium mb-1">Pickup Date</label>
                         <div className="relative">
                             <Input
@@ -165,7 +158,7 @@ const MileageBooking = () => {
                         )}
                     </div>
 
-                    <div className="md:col-span-2">
+                    <div className="md:col-span-6">
                         <label className="block text-sm font-medium mb-1">Pickup Time</label>
                         <div className="relative">
                             <Input
@@ -182,22 +175,9 @@ const MileageBooking = () => {
                         )}
                     </div>
 
-                    <div className="md:col-span-2">
-                        <label className="block text-sm font-medium mb-1">Trip Type</label>
-                        <Select value={values.tripType} onValueChange={(value) => formikRef.current.setFieldValue("tripType", value)}>
-                            <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Select trip type" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="oneway">One Way</SelectItem>
-                                <SelectItem value="return">Return</SelectItem>
-                            </SelectContent>
-                        </Select>
-                    </div>
-
-                    {values.tripType === 'return' && (
+                    {tabs === "return" && (
                         <>
-                            <div className="md:col-span-3">
+                            <div className="md:col-span-6">
                                 <label className="block text-sm font-medium mb-1">Dropoff Date</label>
                                 <div className="relative">
                                     <Input
@@ -214,7 +194,7 @@ const MileageBooking = () => {
                                 )}
                             </div>
 
-                            <div className="md:col-span-3">
+                            <div className="md:col-span-6">
                                 <label className="block text-sm font-medium mb-1">Dropoff Time</label>
                                 <div className="relative">
                                     <Input
@@ -233,7 +213,7 @@ const MileageBooking = () => {
                         </>
                     )}
 
-                    <div className="md:col-span-6 flex justify-end">
+                    <div className="md:col-span-12">
                         <Button type="submit" className="bg-zinc-900 hover:bg-orange-500 text-white w-full" disabled={isLoading}>
                             {isLoading ? (
                                 <div className="animate-spin">

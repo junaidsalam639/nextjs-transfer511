@@ -29,8 +29,6 @@ export default function Footer() {
               </Link>
             </div>
           </div>
-
-
           <div className="col-span-4">
             <h3 className="text-lg font-semibold mb-4 relative inline-block">
               Customer Info
@@ -82,10 +80,16 @@ export default function Footer() {
           </div>
         </div>
 
+        <div className="flex justify-center space-x-4 mt-4">
+          <Link href="/terms" className="text-zinc-400 hover:text-primary">Terms and Conditions</Link>
+          <Link href="/privacy" className="text-zinc-400 hover:text-primary">Privacy Policy</Link>
+          <Link href="/imprint" className="text-zinc-400 hover:text-primary">Imprint</Link>
+        </div>
+
         <div className="border-t border-zinc-800 mt-8 pt-6 text-center text-zinc-500 text-sm">
           <p>© Copyright Company.Com</p>
         </div>
       </div>
-    </footer>
+    </footer >
   )
 }
