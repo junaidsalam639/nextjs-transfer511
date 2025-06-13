@@ -13,8 +13,11 @@ import SocialSidebar from "@/components/social-sidebar"
 import Footer from "@/components/footer"
 
 export const metadata = {
-  title: "Home | Transfer511",
-  description: "Transfer511 ist Ihr zuverlässiger Partner für Flughafentransfers in Deutschland. Genießen Sie einen stressfreien und komfortablen Transfer zu Ihrem Zielort.",
+  title: 'Vehicle Transport Services | Transfer511',
+  description: 'Nationwide vehicle transportation services. Get a free quote for your car shipping needs today!',
+  alternates: {
+    canonical: '/',
+  },
 }
 
 export default function Home() {

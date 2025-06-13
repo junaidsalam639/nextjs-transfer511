@@ -10,7 +10,7 @@ const TripDetailsPage = () => {
             <Header />
             <HeroSection
                 title="Trip Details"
-                subtitle="Ihre Transferübersicht"
+                subtitle="Book your transfer easily and quickly"
             />
             <TripDetailSection />
             <SocialSidebar />

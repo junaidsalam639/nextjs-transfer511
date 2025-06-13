@@ -30,8 +30,8 @@ function HomeTestimonial() {
                             and the cars are clean and comfortable. I highly recommend their service!
                         </p>
                         <div className="text-right">
-                            <Button variant="outline" className="text-primary border-primary hover:bg-primary/10">
-                                WEITERE ANSEHEN
+                            <Button className="w-full hover:bg-zinc-900 bg-orange-500 text-white">
+                                SEE MORE
                             </Button>
                         </div>
                     </div>

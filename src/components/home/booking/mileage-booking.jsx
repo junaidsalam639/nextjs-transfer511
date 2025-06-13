@@ -214,7 +214,7 @@ const MileageBooking = ({ tabs }) => {
                     )}
 
                     <div className="md:col-span-12">
-                        <Button type="submit" className="bg-zinc-900 hover:bg-orange-500 text-white w-full" disabled={isLoading}>
+                        <Button type="submit" className="hover:bg-zinc-900 bg-orange-500 text-white w-full" disabled={isLoading}>
                             {isLoading ? (
                                 <div className="animate-spin">
                                     <Loader />

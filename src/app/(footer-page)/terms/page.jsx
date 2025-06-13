@@ -10,7 +10,7 @@ const TermsPage = () => {
             <Header />
             <HeroSection
                 title="Terms and Conditions"
-                subtitle="Ihre Transferübersicht"
+                subtitle="Book your transfer easily and quickly"
             />
             <div className={cn("max-w-4xl mx-auto px-4 py-8 space-y-8")}>
                 <h1 className="text-3xl font-bold mb-6">General Terms and Conditions of Business</h1>

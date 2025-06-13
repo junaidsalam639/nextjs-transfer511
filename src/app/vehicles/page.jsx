@@ -8,9 +8,13 @@ import Footer from "@/components/footer"
 
 
 export const metadata = {
-  title: "Vehicles | Transfer511",
-  description: "Transfer511 is a family-run airport transfer service in Frankfurt, Germany. We offer reliable and comfortable transfers to and from the airport, with over 10 years of experience.",
+  title: 'Vehicle Transport Options | Transfer511',
+  description: 'Explore our range of vehicle transport services for cars, trucks, motorcycles, and more.',
+  alternates: {
+    canonical: '/vehicles',
+  },
 }
+
 
 export default function VehiclesPage() {
   const carData = [
@@ -47,7 +51,7 @@ export default function VehiclesPage() {
   return (
     <>
       <Header />
-      <HeroSection title="Vehicle" subtitle="Buchen Sie Ihren Transfer einfach und schnell" />
+      <HeroSection title="Vehicle" subtitle="Book your transfer easily and quickly" />
       <OurFleet carData={carData} />
       <FAQSection />
       <CTASection />

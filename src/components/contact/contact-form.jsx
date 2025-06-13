@@ -19,9 +19,9 @@ function ContactForm() {
                                 <div>
                                     <h3 className="font-semibold text-lg mb-2">Mailing Address</h3>
                                     <p className="text-gray-600 dark:text-gray-300">
-                                        901 N Pitt Str., Suite 170
+                                        Munib Afzal, Zentmarkweg 39,
                                         <br />
-                                        Alexandria, USA
+                                        60489 Frankfurt am Main
                                     </p>
                                 </div>
                             </div>
@@ -83,7 +83,7 @@ function ContactForm() {
                                     <div>
                                         <Textarea placeholder="Write A Message" rows={5} />
                                     </div>
-                                    <Button>
+                                    <Button className="w-full hover:bg-zinc-900 bg-orange-500 text-white">
                                         Get In Touch <ArrowRight className="ml-2 h-4 w-4" />
                                     </Button>
                                 </form>

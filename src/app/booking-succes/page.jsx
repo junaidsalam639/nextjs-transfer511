@@ -10,7 +10,7 @@ const SuccessPage = () => {
             <Header />
             <HeroSection
                 title="Booking Success"
-                subtitle="Ihre Transferübersicht"
+                subtitle="Book your transfer easily and quickly"
             />
             <BookingSuccessCard />
             <SocialSidebar />

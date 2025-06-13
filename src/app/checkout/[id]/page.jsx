@@ -19,7 +19,7 @@ const CheckoutPage = ({ params }) => {
             <Header />
             <HeroSection
                 title="Checkout"
-                subtitle="Buchen Sie Ihren Transfer einfach und schnell"
+                subtitle="Book your transfer easily and quickly"
             />
             <CheckoutForm data={filterCar} />
             <SocialSidebar />

@@ -10,7 +10,7 @@ const PrivacyPolicyPage = () => {
             <Header />
             <HeroSection
                 title="Privacy Policy"
-                subtitle="Ihre Transferübersicht"
+                subtitle="Book your transfer easily and quickly"
             />
 
             <div className={cn("max-w-4xl mx-auto px-4 py-8 space-y-8")}>
