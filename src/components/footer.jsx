@@ -33,22 +33,22 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/" className="text-zinc-400 hover:text-primary transition-colors">
+                <Link href="/" className="text-zinc-400 hover:text-white transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-zinc-400 hover:text-primary transition-colors">
+                <Link href="/about" className="text-zinc-400 hover:text-white transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/vehicles" className="text-zinc-400 hover:text-primary transition-colors">
+                <Link href="/vehicles" className="text-zinc-400 hover:text-white transition-colors">
                   Vehicles
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-zinc-400 hover:text-primary transition-colors">
+                <Link href="/contact" className="text-zinc-400 hover:text-white transition-colors">
                   Contact Us
                 </Link>
               </li>
@@ -63,13 +63,13 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-center text-zinc-400">
                 <span className="mr-2">📧</span>
-                <a href="mailto:info@transfer511.com" className="hover:text-primary transition-colors">
+                <a href="mailto:info@transfer511.com" className="hover:text-white transition-colors">
                   info@transfer511.com
                 </a>
               </li>
               <li className="flex items-center text-zinc-400">
                 <span className="mr-2">📞</span>
-                <a href="tel:+4917657844670" className="hover:text-primary transition-colors">
+                <a href="tel:+4917657844670" className="hover:text-white transition-colors">
                   +49 1765 7844670
                 </a>
               </li>
@@ -78,12 +78,12 @@ export default function Footer() {
         </div>
 
         <div className="flex justify-center space-x-4 mt-6">
-          <Link href="/terms" className="text-zinc-400 hover:text-primary">Terms and Conditions</Link>
-          <Link href="/privacy" className="text-zinc-400 hover:text-primary">Privacy Policy</Link>
-          <Link href="/imprint" className="text-zinc-400 hover:text-primary">Imprint</Link>
+          <Link href="/terms" className="text-zinc-400 hover:text-white">Terms and Conditions</Link>
+          <Link href="/privacy" className="text-zinc-400 hover:text-white">Privacy Policy</Link>
+          <Link href="/imprint" className="text-zinc-400 hover:text-white">Imprint</Link>
         </div>
 
-        <div className="border-t border-zinc-800 mt-8 pt-6 text-center text-zinc-400 hover:text-primary transition-colors">
+        <div className="border-t border-zinc-800 mt-8 pt-6 text-center text-zinc-400 hover:text-white transition-colors">
           <p>© Copyright transfer511.com</p>
         </div>
       </div>
