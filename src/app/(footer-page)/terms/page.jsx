@@ -17,8 +17,8 @@ const TermsPage = () => {
 
                 <p className='text-sm'>
                     Welcome to <strong>Transfer511</strong>! These terms and conditions outline the rules and regulations for the use of Transfer511's Website, located at
-                    <a href="https://transfer511.com" className="text-blue-600 underline ml-1" target="_blank" rel="noopener noreferrer">
-                        https://transfer511.com
+                    <a href="https://www.fra-transfer.de/" className="text-blue-600 underline ml-1" target="_blank" rel="noopener noreferrer">
+                        https://www.fra-transfer.de/
                     </a>
                 </p>
 
