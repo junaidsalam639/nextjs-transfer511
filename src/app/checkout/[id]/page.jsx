@@ -7,8 +7,8 @@ import { carData } from '@/lib/car-data';
 
 
 const metadata = {
-    title: 'Checkout | Transfer511',
-    description: 'Transfer511 is a family-run airport transfer service in Frankfurt, Germany. We offer reliable and comfortable transfers to and from the airport, with over 10 years of experience.',
+    title: 'Checkout | FRA-Transfer',
+    description: 'FRA-Transfer is a family-run airport transfer service in Frankfurt, Germany. We offer reliable and comfortable transfers to and from the airport, with over 10 years of experience.',
 };
 
 const CheckoutPage = ({ params }) => {

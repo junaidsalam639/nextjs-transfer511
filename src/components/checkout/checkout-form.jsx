@@ -17,6 +17,7 @@ import { Loader } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { setSuccessBookingData } from "@/redux/successBookingSlice";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 
 const baseUrl = "https://transfer511.webedevs.com/public/api";
 
@@ -42,6 +43,7 @@ function CheckoutForm() {
             luggage: "",
             notes: "",
             agreeTerms: false,
+            paymentMethod: "",
         },
         validationSchema: Yup.object({
             firstName: Yup.string().required("First name is required"),
@@ -53,6 +55,7 @@ function CheckoutForm() {
             luggage: Yup.string().required("Luggage info is required"),
             notes: Yup.string().required("Order notes are required"),
             agreeTerms: Yup.boolean().oneOf([true], "You must accept terms"),
+            paymentMethod: Yup.string().required("Payment method is required"),
         }),
         onSubmit: async (values) => {
             setBtnLoader(true);
@@ -115,6 +118,9 @@ function CheckoutForm() {
         formik.touched[field] && formik.errors[field] ? (
             <p className="text-sm text-red-500">{formik.errors[field]}</p>
         ) : null;
+
+
+    const cost = (couponData?.price / 119 * 19);
 
     return (
         <form onSubmit={formik.handleSubmit} className="max-w-4xl mx-auto px-4 py-8">
@@ -245,12 +251,25 @@ function CheckoutForm() {
                         <TableBody>
                             <TableRow>
                                 <TableCell className="py-2">Product</TableCell>
-                                <TableCell className="py-2 text-right font-semibold">Subtotal</TableCell>
+                                <TableCell className="py-2 text-right font-semibold">Zwischensumme</TableCell>
                             </TableRow>
                             <TableRow className="border-t font-medium">
-                                <TableCell className="py-2">Total</TableCell>
+                                <TableCell className="py-2">Transfer</TableCell>
                                 <TableCell className="py-2 text-right font-bold">
                                     € {couponData?.price}
+                                </TableCell>
+                            </TableRow>
+                            <TableRow className="border-t font-medium">
+                                <TableCell className="py-2">Zwischensumme</TableCell>
+                                <TableCell className="py-2 text-right font-bold">
+                                    € {couponData?.price}
+                                </TableCell>
+                            </TableRow>
+                            <TableRow className="border-t font-medium">
+                                <TableCell className="py-2">Gesamtsumme</TableCell>
+                                <TableCell className="py-2 text-right font-bold">
+                                    € {couponData?.price} {" "}
+                                    (inkl. € {cost.toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Umsatzsteuer)
                                 </TableCell>
                             </TableRow>
                         </TableBody>
@@ -258,7 +277,29 @@ function CheckoutForm() {
                 </CardContent>
             </Card>
 
-            <div className="flex items-start space-x-2 mb-4">
+            <Card className="p-6 space-y-4">
+                <RadioGroup
+                    value={formik.values.paymentMethod}
+                    onValueChange={(value) => formik.setFieldValue("paymentMethod", value)}
+                >
+                    <div className="flex items-center space-x-3">
+                        <RadioGroupItem value="cash" id="cash" className="cursor-pointer" />
+                        <Label className="cursor-pointer" htmlFor="cash">Barzahlung (Cash Payment)</Label>
+                    </div>
+
+                    <div className="flex items-center space-x-3">
+                        <RadioGroupItem value="paypal" id="paypal" className="cursor-pointer" />
+                        <Label className="cursor-pointer" htmlFor="paypal">PayPal</Label>
+                    </div>
+
+                    <div className="flex items-center space-x-3">
+                        <RadioGroupItem value="credit-card" id="credit-card" className="cursor-pointer" />
+                        <Label className="cursor-pointer" htmlFor="credit-card">Credit Card (Stripe)</Label>
+                    </div>
+                </RadioGroup>
+            </Card>
+
+            <div className="flex items-start space-x-2 my-4">
                 <Checkbox
                     id="terms"
                     checked={formik.values.agreeTerms}

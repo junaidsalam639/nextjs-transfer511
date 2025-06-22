@@ -8,7 +8,7 @@ import SocialSidebar from "@/components/social-sidebar"
 import Footer from "@/components/footer"
 
 export const metadata = {
-  title: 'About Transfer511 - Our Vehicle Transport Services',
+  title: 'About FRA-Transfer - Our Vehicle Transport Services',
   description: 'Learn about our company, mission, and why we are the trusted choice for vehicle transportation services.',
   alternates: {
     canonical: '/about',

@@ -13,7 +13,7 @@ import SocialSidebar from "@/components/social-sidebar"
 import Footer from "@/components/footer"
 
 export const metadata = {
-  title: 'Vehicle Transport Services | Transfer511',
+  title: 'Vehicle Transport Services | FRA-Transfer',
   description: 'Nationwide vehicle transportation services. Get a free quote for your car shipping needs today!',
   alternates: {
     canonical: '/',
@@ -45,28 +45,28 @@ export default function Home() {
 
   const carData = [
     {
-      title: 'Limousine',
+      title: 'Standart class',
       subtitle: 'Standard motor Cars',
       image: '/assets/images/cars/card-one.jpeg',
       passengers: 4,
       luggage: 3,
     },
     {
-      title: 'Station Wagon',
+      title: 'Business class',
       subtitle: 'Fit, Brutale',
       image: '/assets/images/cars/card-two.webp',
       passengers: 4,
       luggage: 4,
     },
     {
-      title: '7-Seater',
+      title: 'Economy Van',
       subtitle: 'Standard motor Cars',
       image: '/assets/images/cars/card-three.jpeg',
       passengers: 7,
       luggage: 5,
     },
     {
-      title: '9-Seater',
+      title: 'Van class',
       subtitle: 'Fit, Brutale',
       image: '/assets/images/cars/card-four.jpeg',
       passengers: 9,

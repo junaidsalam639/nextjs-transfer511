@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/next-script-for-ga */
 import { Roboto } from 'next/font/google'
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"

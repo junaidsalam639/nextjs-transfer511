@@ -7,15 +7,15 @@ export default function FAQSection() {
     const faqs = [
         {
             id: "1",
-            question: 'What makes Transfer511 special?',
+            question: 'What makes FRA-Transfer special?',
             answer:
-                'Transfer511 offers premium airport transfer services with a focus on reliability and comfort. Our modern fleet, professional drivers, and commitment to top-tier service ensure you arrive relaxed and on time—whether you\'re traveling for business or leisure.',
+                'FRA-Transfer offers premium airport transfer services with a focus on reliability and comfort. Our modern fleet, professional drivers, and commitment to top-tier service ensure you arrive relaxed and on time—whether you\'re traveling for business or leisure.',
         },
         {
             id: "2",
             question: 'How can I make a reservation?',
             answer:
-                'Booking with Transfer511 is quick and easy. Simply visit our user-friendly website, enter your pickup and drop-off details, choose your preferred vehicle, and confirm the date and time. Your transfer will be booked in just a few steps!',
+                'Booking with FRA-Transfer is quick and easy. Simply visit our user-friendly website, enter your pickup and drop-off details, choose your preferred vehicle, and confirm the date and time. Your transfer will be booked in just a few steps!',
         },
         {
             id: "3",
@@ -25,21 +25,21 @@ export default function FAQSection() {
         },
         {
             id: "4",
-            question: 'Is Transfer511 available 24/7?',
+            question: 'Is FRA-Transfer available 24/7?',
             answer:
-                'Yes, Transfer511 operates 24 hours a day, 7 days a week, all year round. We understand that travel schedules can vary, which is why we’re always available whenever you need us.',
+                'Yes, FRA-Transfer operates 24 hours a day, 7 days a week, all year round. We understand that travel schedules can vary, which is why we’re always available whenever you need us.',
         },
         {
             id: "5",
             question: 'Can I change my reservation?',
             answer:
-                'At Transfer511, flexibility is a priority. You can easily modify your booking within a specified time frame before your scheduled pickup. Just log in to your customer account online or contact our support team for assistance.',
+                'At FRA-Transfer, flexibility is a priority. You can easily modify your booking within a specified time frame before your scheduled pickup. Just log in to your customer account online or contact our support team for assistance.',
         },
         {
             id: "6",
             question: 'How do I find my driver at the airport?',
             answer:
-                'Transfer511 provides clear instructions for your meeting point. Your friendly driver will be waiting there with a personalized sign, making it easy for you to spot them right away.',
+                'FRA-Transfer provides clear instructions for your meeting point. Your friendly driver will be waiting there with a personalized sign, making it easy for you to spot them right away.',
         },
         {
             id: "7",
@@ -55,7 +55,7 @@ export default function FAQSection() {
         },
         {
             id: "9",
-            question: 'How can I contact Transfer511 customer support?',
+            question: 'How can I contact FRA-Transfer customer support?',
             answer:
                 'Our friendly support team is easily reachable through the contact details provided on our website or in your confirmation email. We’re always here to help with any questions or concerns you may have.',
         },

@@ -27,13 +27,18 @@ const CheckoutTripDetails = ({ booking }) => {
                     </div>
                     <Separator />
                     <div className="flex justify-between">
+                        <span className="text-muted-foreground">Distance Time:</span>
+                        <span>{booking?.estimated_travel_time}</span>
+                    </div>
+                    <Separator />
+                    <div className="flex justify-between">
                         <span className="text-muted-foreground">Pickup Date:</span>
                         <span>{booking?.pickup_date}</span>
                     </div>
                     <Separator />
                     <div className="flex justify-between">
                         <span className="text-muted-foreground">Pickup Time:</span>
-                        <span>{booking?.estimated_travel_time}</span>
+                        <span>{booking?.pickup_time}</span>
                     </div>
                 </CardContent>
             </Card>

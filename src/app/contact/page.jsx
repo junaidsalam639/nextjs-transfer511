@@ -6,7 +6,7 @@ import SocialSidebar from "@/components/social-sidebar"
 import Footer from "@/components/footer"
 
 export const metadata = {
-  title: 'Contact Transfer511 - Get a Free Quote',
+  title: 'Contact FRA-Transfer - Get a Free Quote',
   description: 'Contact our team for vehicle transport inquiries and get a free, no-obligation quote.',
   alternates: {
     canonical: '/contact',

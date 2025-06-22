@@ -8,7 +8,7 @@ import Footer from "@/components/footer"
 
 
 export const metadata = {
-  title: 'Vehicle Transport Options | Transfer511',
+  title: 'Vehicle Transport Options | FRA-Transfer',
   description: 'Explore our range of vehicle transport services for cars, trucks, motorcycles, and more.',
   alternates: {
     canonical: '/vehicles',
@@ -19,28 +19,28 @@ export const metadata = {
 export default function VehiclesPage() {
   const carData = [
     {
-      title: 'LIMOUSINE',
+      title: 'Standart class',
       subtitle: 'Standard motor Cars',
       image: '/assets/images/cars/card-one.jpeg',
       passengers: 4,
       luggage: 3,
     },
     {
-      title: 'KOMBI',
+      title: 'Business class',
       subtitle: 'Fit, Brutale',
       image: '/assets/images/cars/card-two.webp',
       passengers: 4,
       luggage: 4,
     },
     {
-      title: '7-SITZER',
+      title: 'Economy Van',
       subtitle: 'Standard motor Cars',
       image: '/assets/images/cars/card-three.jpeg',
       passengers: 7,
       luggage: 5,
     },
     {
-      title: '9-SITZER',
+      title: 'Van class',
       subtitle: 'Fit, Brutale',
       image: '/assets/images/cars/card-four.jpeg',
       passengers: 9,

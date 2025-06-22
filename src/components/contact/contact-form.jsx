@@ -42,7 +42,7 @@ function ContactForm() {
                                 </div>
                                 <div>
                                     <h3 className="font-semibold text-lg mb-2">Support Email</h3>
-                                    <p className="text-gray-600 dark:text-gray-300">info@transfer511.com</p>
+                                    <p className="text-gray-600 dark:text-gray-300">info@fra-transfer.de</p>
                                 </div>
                             </div>
                         </div>

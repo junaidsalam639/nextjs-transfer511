@@ -18,8 +18,7 @@ const CheckoutCarCard = ({ selectCar }) => {
                             className="w-28 h-24 object-cover rounded"
                         />
                         <div>
-                            <CardTitle className="text-xl mb-2">{selectCar?.category}</CardTitle>
-                            <CardTitle className="text-md mb-2">{selectCar?.name}</CardTitle>
+                            <CardTitle className="text-xl mb-2">{selectCar?.name}</CardTitle>
                             <div className="text-sm text-muted-foreground flex items-center gap-3">
                                 <Badge variant="secondary">🧑‍🤝‍🧑 {selectCar?.passenger_capacity} Passenger</Badge>
                             </div>

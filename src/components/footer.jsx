@@ -63,8 +63,8 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-center text-zinc-400">
                 <span className="mr-2">📧</span>
-                <a href="mailto:info@transfer511.com" className="hover:text-white transition-colors">
-                  info@transfer511.com
+                <a href="mailto:info@fra-transfer.de" className="hover:text-white transition-colors">
+                  info@fra-transfer.de
                 </a>
               </li>
               <li className="flex items-center text-zinc-400">
@@ -84,7 +84,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-zinc-800 mt-8 pt-6 text-center text-zinc-400 hover:text-white transition-colors">
-          <p>© Copyright transfer511.com</p>
+          <p>© Copyright FRA-Transfer.com</p>
         </div>
       </div>
     </footer >

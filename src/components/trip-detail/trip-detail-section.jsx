@@ -50,8 +50,7 @@ const TripDetailSection = () => {
                   className="w-full h-48 object-cover rounded-t-lg"
                 />
                 <div className="p-6">
-                  <CardTitle className="text-xl mb-3">{car?.category}</CardTitle>
-                  <CardTitle className="text-md mb-3">{car?.name}</CardTitle>
+                  <CardTitle className="text-xl mb-3">{car?.name}</CardTitle>
                   <ul className="text-sm text-muted-foreground space-y-2 mb-4">
                     {car?.features?.map((fea, idx) => (
                       <li className="flex items-center gap-2" key={idx}>
@@ -99,13 +98,18 @@ const TripDetailSection = () => {
               </div>
               <Separator />
               <div className="flex justify-between">
+                <span className="text-muted-foreground">Distance Time:</span>
+                <span>{booking?.estimated_travel_time}</span>
+              </div>
+              <Separator />
+              <div className="flex justify-between">
                 <span className="text-muted-foreground">Pickup Date:</span>
                 <span>{booking?.pickup_date}</span>
               </div>
               <Separator />
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Pickup Time:</span>
-                <span>{booking?.estimated_travel_time}</span>
+                <span>{booking?.pickup_time}</span>
               </div>
             </CardContent>
           </Card>

@@ -7,7 +7,7 @@ function HomeChoose() {
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                         <div>
-                            <h2 className="text-3xl font-bold mb-6">Why Choose Transfer511</h2>
+                            <h2 className="text-3xl font-bold mb-6">Why Choose FRA-Transfer</h2>
                             <ul className="space-y-4">
                                 <li className="flex items-start">
                                     <span className=" text-white p-1 rounded-full mr-3 mt-1">✓</span>

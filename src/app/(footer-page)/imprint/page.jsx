@@ -21,7 +21,7 @@ const ImprintPage = () => {
                     <div className="flex items-start gap-3">
                         <Map className="mt-1" />
                         <div>
-                            <strong>Transfer511</strong><br />
+                            <strong>FRA-Transfer</strong><br />
                             Zentmarkweg 39<br />
                             60489 Frankfurt am Main<br />
                             Germany
@@ -40,7 +40,7 @@ const ImprintPage = () => {
 
                     <div className="flex items-center gap-3">
                         <Mail />
-                        <span>Email: <a href="mailto:info@transfer511.com">info@transfer511.com</a></span>
+                        <span>Email: <a href="mailto:info@fra-transfer.de">info@fra-transfer.de</a></span>
                     </div>
 
                     <div className="flex items-center gap-3">

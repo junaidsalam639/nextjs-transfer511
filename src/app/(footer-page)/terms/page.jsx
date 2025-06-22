@@ -16,44 +16,44 @@ const TermsPage = () => {
                 <h1 className="text-3xl font-bold mb-6">General Terms and Conditions of Business</h1>
 
                 <p className='text-sm'>
-                    Welcome to <strong>Transfer511</strong>! These terms and conditions outline the rules and regulations for the use of Transfer511's Website, located at
+                    Welcome to <strong>FRA-Transfer</strong>! These terms and conditions outline the rules and regulations for the use of FRA-Transfer's Website, located at
                     <a href="https://www.fra-transfer.de/" className="text-blue-600 underline ml-1" target="_blank" rel="noopener noreferrer">
                         https://www.fra-transfer.de/
                     </a>
                 </p>
 
                 <p className='text-sm'>
-                    By accessing this website, we assume you accept the Terms and Conditions. Please do not continue to use Transfer511 if you do not agree to accept all of the terms and conditions stated on this page.
+                    By accessing this website, we assume you accept the Terms and Conditions. Please do not continue to use FRA-Transfer if you do not agree to accept all of the terms and conditions stated on this page.
                 </p>
 
                 <section>
                     <h2 className="text-lg mb-2 font-semibold">1. Scope</h2>
                     <p className='text-sm'>
-                        These Terms and Conditions govern all legal relationships between Transfer511 and its customers. They supersede all previous Terms and Conditions and apply exclusively to these customers. Any other Terms and Conditions are expressly rejected.
+                        These Terms and Conditions govern all legal relationships between FRA-Transfer and its customers. They supersede all previous Terms and Conditions and apply exclusively to these customers. Any other Terms and Conditions are expressly rejected.
                     </p>
                 </section>
 
                 <section>
                     <h2 className="text-lg mb-2 font-semibold">2. Conclusion of Contract</h2>
                     <p className='text-sm'>
-                        The contract is only concluded upon sending a confirmation email from Transfer511. There is no obligation to conclude a contract under any circumstances.
+                        The contract is only concluded upon sending a confirmation email from FRA-Transfer. There is no obligation to conclude a contract under any circumstances.
                     </p>
                 </section>
 
                 <section>
                     <h2 className="text-lg mb-2 font-semibold">3. Booking Requests</h2>
                     <p className='text-sm'>
-                        Transfer511 accepts booking requests only through its website. Requesters must provide their full name, the number of passengers, and the number, size, weight, and type of luggage when making their request. Transfer511 reserves the right to reject booking requests due to the number of passengers or the size, weight, or type of luggage.
+                        FRA-Transfer accepts booking requests only through its website. Requesters must provide their full name, the number of passengers, and the number, size, weight, and type of luggage when making their request. FRA-Transfer reserves the right to reject booking requests due to the number of passengers or the size, weight, or type of luggage.
                     </p>
                 </section>
 
                 <section>
-                    <h2 className="text-lg mb-2 font-semibold">4. Reasons for Termination by Transfer511</h2>
+                    <h2 className="text-lg mb-2 font-semibold">4. Reasons for Termination by FRA-Transfer</h2>
                     <p className='text-sm'>
-                        Transfer511 reserves the right to cancel the order even after confirmation if the number of passengers and/or luggage is significantly higher than agreed.
+                        FRA-Transfer reserves the right to cancel the order even after confirmation if the number of passengers and/or luggage is significantly higher than agreed.
                         This includes situations where child seats were not pre-informed, passengers/luggage are late at pickup (15 mins), or in airport pickups with delays exceeding 60 minutes.
                         Cancellation is also possible in cases of intoxication, drug use, contagious diseases, aggression, or offensive behavior.
-                        In such cases, Transfer511 may still charge the agreed fee unless the customer proves lesser damage.
+                        In such cases, FRA-Transfer may still charge the agreed fee unless the customer proves lesser damage.
                     </p>
                 </section>
 
@@ -82,7 +82,7 @@ const TermsPage = () => {
                 <section>
                     <h2 className="text-lg mb-2 font-semibold">8. Routes / Surcharges</h2>
                     <p className='text-sm'>
-                        Transfer511 selects the fastest route depending on traffic. Extra charges apply for stopovers, route deviations, or delays.
+                        FRA-Transfer selects the fastest route depending on traffic. Extra charges apply for stopovers, route deviations, or delays.
                         Delay surcharge: €15 per 15 minutes after standard waiting times.
                     </p>
                 </section>
@@ -90,7 +90,7 @@ const TermsPage = () => {
                 <section>
                     <h2 className="text-lg mb-2 font-semibold">9. Limitation of Liability</h2>
                     <p className='text-sm'>
-                        Transfer511 is liable only for essential contractual obligations or damage due to intent/gross negligence.
+                        FRA-Transfer is liable only for essential contractual obligations or damage due to intent/gross negligence.
                         No liability for traffic-related delays. Product liability rights remain unaffected.
                     </p>
                 </section>
@@ -99,7 +99,7 @@ const TermsPage = () => {
                     <h2 className="text-lg mb-2 font-semibold">10. Applicable Law / Place of Jurisdiction</h2>
                     <p className='text-sm'>
                         German law applies. For EU consumers, mandatory local consumer rights remain valid.
-                        For merchants, the place of jurisdiction is the registered office of Transfer511. Contract language: German.
+                        For merchants, the place of jurisdiction is the registered office of FRA-Transfer. Contract language: German.
                     </p>
                 </section>
             </div>

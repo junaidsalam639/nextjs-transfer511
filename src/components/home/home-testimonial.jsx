@@ -26,7 +26,7 @@ function HomeTestimonial() {
                             </div>
                         </div>
                         <p className="text-gray-600 dark:text-gray-300 mb-4">
-                            Ive used Transfer511 multiple times and they have never let me down. The drivers are always professional
+                            Ive used FRA-Transfer multiple times and they have never let me down. The drivers are always professional
                             and the cars are clean and comfortable. I highly recommend their service!
                         </p>
                         <div className="text-right">

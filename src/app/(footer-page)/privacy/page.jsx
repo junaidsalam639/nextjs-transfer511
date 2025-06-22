@@ -33,7 +33,7 @@ const PrivacyPolicyPage = () => {
                             <strong>Muhammad Afzal</strong><br />
                             Zentmarkweg 39<br />
                             60489 Frankfurt am Main<br />
-                            Email: <a href="mailto:info@transfer511.com" className="text-blue-600 hover:underline">info@transfer511.com</a><br />
+                            Email: <a href="mailto:info@fra-transfer.de" className="text-blue-600 hover:underline">info@fra-transfer.de</a><br />
                             Telephone: <a href="tel:+4917657844670" className="text-blue-600 hover:underline">+4917657844670</a>
                         </p>
                     </div>
@@ -229,7 +229,7 @@ const PrivacyPolicyPage = () => {
                     </p>
                     <div className="mt-2">
                         <p className='text-sm'>
-                            By email: <a href="mailto:info@transfer511.com" className="text-blue-600 hover:underline">info@transfer511.com</a><br />
+                            By email: <a href="mailto:info@fra-transfer.de" className="text-blue-600 hover:underline">info@fra-transfer.de</a><br />
                             By phone: <a href="tel:+4917657844670" className="text-blue-600 hover:underline">+49 176 57844670</a><br />
                             By mail: Muhammad Afzal, Zentmarkweg 39, 60489 Frankfurt am Main, Germany
                         </p>
