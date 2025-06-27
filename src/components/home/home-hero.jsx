@@ -6,7 +6,7 @@ function HomeHero() {
     const [tabs, setTabs] = useState("mileage");
 
     return (
-        <section className="hero-section relative py-20 md:py-32">
+        <section className="hero-section relative py-20 md:py-32" id='home'>
             <div className="container mx-auto px-4">
                 <div className="max-w-3xl mx-auto text-center">
                     <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">

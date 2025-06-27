@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -60,15 +61,15 @@ function ContactForm() {
                             </div>
 
                             <div className="md:col-span-2 bg-gray-50 dark:bg-zinc-800 p-6 rounded-lg">
-                                <form className="space-y-4">
+                                <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
                                     <div>
-                                        <Input placeholder="Name" />
+                                        <Input placeholder="Name" required />
                                     </div>
                                     <div>
-                                        <Input type="email" placeholder="Email Address" />
+                                        <Input type="email" placeholder="Email Address" required />
                                     </div>
                                     <div>
-                                        <Select>
+                                        <Select required>
                                             <SelectTrigger className="w-full">
                                                 <SelectValue placeholder="Select Subject" />
                                             </SelectTrigger>
@@ -81,7 +82,7 @@ function ContactForm() {
                                         </Select>
                                     </div>
                                     <div>
-                                        <Textarea placeholder="Write A Message" rows={5} />
+                                        <Textarea placeholder="Write A Message" rows={5} required />
                                     </div>
                                     <Button className="w-full hover:bg-zinc-900 bg-orange-500 text-white">
                                         Get In Touch <ArrowRight className="ml-2 h-4 w-4" />

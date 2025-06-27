@@ -6,12 +6,12 @@ function AboutText() {
                     <div className="max-w-4xl mx-auto">
                         <div className="mb-8">
                             <span className="text-primary font-medium uppercase">ABOUT US</span>
-                            <h2 className="text-3xl md:text-4xl font-bold mt-2">GET TO KNOW TRANSFER511</h2>
+                            <h2 className="text-3xl md:text-4xl font-bold mt-2">GET TO KNOW FRA-Transfer</h2>
                         </div>
 
                         <div className="space-y-6 text-gray-700 dark:text-gray-300">
                             <p>
-                                Welcome to Transfer511 - your experienced and reliable airport transfer service in Frankfurt. For over
+                                Welcome to FRA-Transfer - your experienced and reliable airport transfer service in Frankfurt. For over
                                 10 years, we've been safely, punctually, and comfortably transporting our passengers to their destinations - whether to the airport or back home.
                             </p>
 
