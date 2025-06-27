@@ -5,9 +5,10 @@ const GoogleTranslate = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const storedLang = localStorage.getItem("googtrans") || "/en/en";
+    const userCountry = detectUserCountry();
+    const defaultLang = userCountry === 'DE' ? '/en/de' : '/en/en';
+    const storedLang = localStorage.getItem("googtrans") || defaultLang;
     document.cookie = `googtrans=${storedLang}; path=/; domain=.fra-transfer.de;`;
-
     const addGoogleTranslateScript = () => {
       const script = document.createElement("script");
       script.type = "text/javascript";
@@ -41,6 +42,12 @@ const GoogleTranslate = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  const detectUserCountry = () => {
+    const cachedCountry = localStorage.getItem('userCountry');
+    if (cachedCountry) return cachedCountry;
+    return 'EN';
+  };
 
   return (
     <div>
