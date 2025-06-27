@@ -1,5 +1,4 @@
 "use client"
-import { useCookies } from "react-cookie";
 import {
     Select,
     SelectContent,
@@ -8,22 +7,20 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
+
 const languageOptions = [
     { code: "/en/en", name: "English" },
     { code: "/en/de", name: "German" },
 ];
 
 const LanguageSelector = () => {
-    const [cookies, setCookie] = useCookies(["googtrans"]);
-
+    const currentLang = localStorage.getItem("googtrans") || "/en/en";
     const handleChangeLanguage = (value) => {
         document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        setCookie("googtrans", value, { path: "/" });
-        document.cookie = `googtrans=${value}; path=/;`;
+        document.cookie = `googtrans=${value}; path=/; domain=.fra-transfer.de;`;
+        localStorage.setItem("googtrans", value);
         window.location.reload();
     };
-
-    const currentLang = cookies?.googtrans || "/en/en";
 
     return (
         <div id="lang-selector" className="language-selector font-semibold styled-select notranslate">
