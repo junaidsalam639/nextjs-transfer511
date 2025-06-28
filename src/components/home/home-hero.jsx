@@ -15,12 +15,12 @@ function HomeHero() {
                     <p className="text-white/90 mb-8">Easily and quickly book your transfer.</p>
                 </div>
                 <div className="max-w-6xl mx-auto bg-white dark:bg-zinc-800 rounded-lg p-6 shadow-lg">
-                    <div className='flex md:flex-row flex-col justify-between w-80 gap-2'>
+                    <div className='flex md:flex-row flex-col justify-between md:w-80 w-full gap-2'>
                         <button
-                            className={`${tabs === "mileage" ? "bg-orange-500" : "bg-black"} text-sm py-3 px-4 w-40 cursor-pointer rounded text-white`}
+                            className={`${tabs === "mileage" ? "bg-orange-500" : "bg-black"} text-sm py-3 px-4 md:w-40 w-full cursor-pointer rounded text-white`}
                             onClick={() => setTabs("mileage")}>Mileage Booking</button>
                         <button
-                            className={`${tabs === "return" ? "bg-orange-500" : "bg-black"} text-sm py-3 px-4 w-40 cursor-pointer rounded text-white`}
+                            className={`${tabs === "return" ? "bg-orange-500" : "bg-black"} text-sm py-3 px-4 md:w-40 w-full cursor-pointer rounded text-white`}
                             onClick={() => setTabs("return")}>Return Booking</button>
                     </div>
 
