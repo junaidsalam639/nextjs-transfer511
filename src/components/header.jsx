@@ -89,6 +89,7 @@ export default function Header() {
                   {link.name}
                 </Link>
               ))}
+               <LanguageSelector />
             </nav>
           </div>
         </div>
