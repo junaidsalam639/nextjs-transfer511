@@ -3,7 +3,7 @@ import { Phone, Mail, MessageSquare } from "lucide-react"
 
 export default function SocialSidebar() {
   return (
-    <div className="fixed right-0 top-1/2 -translate-y-1/2 z-40 hidden md:block">
+    <div className="fixed right-0 top-1/2 -translate-y-1/2 z-40 block">
       <div className="flex flex-col">
         <Link
           href="https://wa.me/4917657844670"
