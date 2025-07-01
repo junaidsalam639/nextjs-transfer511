@@ -1,7 +1,7 @@
 "use client";
 import React, { forwardRef, useState, useImperativeHandle } from "react";
 import { Autocomplete, useJsApiLoader } from "@react-google-maps/api";
-import { Input } from "./ui/input";
+import { Input } from "../ui/input";
 import { Search } from "lucide-react";
 
 const libraries = ["places"];

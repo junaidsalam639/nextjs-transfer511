@@ -1,9 +1,9 @@
 import React from 'react'
-import { Card, CardContent, CardTitle } from '../ui/card'
+import { Card, CardContent, CardTitle } from './card'
 import Image from 'next/image'
-import { Badge } from '../ui/badge'
+import { Badge } from './badge'
 
-const CheckoutCarCard = ({ selectCar }) => {
+const CarSmallCard = ({ selectCar }) => {
 
     return (
         <>
@@ -33,6 +33,7 @@ const CheckoutCarCard = ({ selectCar }) => {
     )
 }
 
-export default CheckoutCarCard
+export default CarSmallCard
+
 
 

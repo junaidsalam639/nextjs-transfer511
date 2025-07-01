@@ -8,7 +8,7 @@ import { useApplyCoupenMutation } from '@/service/appyCoupenApi'
 import { toast } from 'sonner'
 import { Loader } from 'lucide-react'
 
-const CheckoutCoupon = ({ price, setCouponData }) => {
+const BookingCoupon = ({ price, setCouponData }) => {
     const [showCouponField, setShowCouponField] = useState(false);
     const [couponCode, setCouponCode] = useState("");
     const [applyCoupen, { isLoading }] = useApplyCoupenMutation();
@@ -74,7 +74,7 @@ const CheckoutCoupon = ({ price, setCouponData }) => {
     )
 }
 
-export default CheckoutCoupon
+export default BookingCoupon
 
 
 

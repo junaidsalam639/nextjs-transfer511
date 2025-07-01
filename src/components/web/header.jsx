@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation"
 import { Search, ShoppingCart, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ModeToggle } from "./mode-toogle"
-import LanguageSelector from "./language/language-selector"
+import LanguageSelector from "../language/language-selector"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)

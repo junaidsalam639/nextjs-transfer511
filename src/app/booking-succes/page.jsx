@@ -1,8 +1,8 @@
 import BookingSuccessCard from '@/components/booking-sccess/booking-success-card';
-import Footer from '@/components/footer';
-import Header from '@/components/header';
-import HeroSection from '@/components/hero-section';
-import SocialSidebar from '@/components/social-sidebar';
+import Footer from '@/components/web/footer';
+import Header from '@/components/web/header';
+import HeroSection from '@/components/web/hero-section';
+import SocialSidebar from '@/components/web/social-sidebar';
 
 const SuccessPage = () => {
     return (

@@ -1,9 +1,9 @@
-import HeroSection from "@/components/hero-section"
-import CTASection from "@/components/cta-section"
+import HeroSection from "@/components/web/hero-section"
+import CTASection from "@/components/web/cta-section"
 import ContactForm from "@/components/contact/contact-form"
-import Header from "@/components/header"
-import SocialSidebar from "@/components/social-sidebar"
-import Footer from "@/components/footer"
+import Header from "@/components/web/header"
+import SocialSidebar from "@/components/web/social-sidebar"
+import Footer from "@/components/web/footer"
 
 export const metadata = {
   title: 'Contact FRA-Transfer - Get a Free Quote',

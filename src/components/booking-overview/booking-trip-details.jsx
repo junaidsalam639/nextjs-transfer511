@@ -2,7 +2,7 @@ import React from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { Separator } from '../ui/separator'
 
-const CheckoutTripDetails = ({ booking }) => {
+const BookingTripDetails = ({ booking }) => {
     return (
         <>
             <Card className="mb-6">
@@ -46,7 +46,7 @@ const CheckoutTripDetails = ({ booking }) => {
     )
 }
 
-export default CheckoutTripDetails
+export default BookingTripDetails
 
 
 

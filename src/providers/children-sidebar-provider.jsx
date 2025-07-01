@@ -1,5 +1,5 @@
 "use client";
-import { AppSidebar } from "@/components/app-sidebar"
+import { AppSidebar } from "@/components/web/app-sidebar"
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator"
 import {

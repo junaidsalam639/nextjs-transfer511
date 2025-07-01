@@ -1,7 +1,7 @@
-import Footer from '@/components/footer';
-import Header from '@/components/header';
-import HeroSection from '@/components/hero-section';
-import SocialSidebar from '@/components/social-sidebar';
+import Footer from '@/components/web/footer';
+import Header from '@/components/web/header';
+import HeroSection from '@/components/web/hero-section';
+import SocialSidebar from '@/components/web/social-sidebar';
 import TripDetailSection from '@/components/trip-detail/trip-detail-section';
 
 const TripDetailsPage = () => {

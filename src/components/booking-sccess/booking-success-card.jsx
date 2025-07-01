@@ -1,21 +1,15 @@
 "use client";
 import React from "react";
 import { useSelector } from "react-redux";
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
-import {
-    CheckCircle,
-    MapPin,
-    Calendar,
-    Phone,
-    BadgeCheck,
-    User,
-    DollarSign,
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { 
+  CheckCircle2, MapPin, Phone, Mail, User, 
+  DollarSign, Clock, Car, Info, Navigation, Luggage,
+  CreditCard, BadgeCheck, CalendarDays
 } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import BookingSteps from "../web/booking-steps";
+import { Badge } from "@/components/ui/badge";
 
 const BookingSuccessCard = () => {
     const { successBooking } = useSelector((state) => state);
@@ -23,69 +17,154 @@ const BookingSuccessCard = () => {
     if (!successBooking) return null;
 
     return (
-        <div className="max-w-4xl mx-auto my-10 px-4">
-            <Card className="shadow-2xl border-green-600 border-[1.5px] rounded-2xl overflow-hidden py-0">
-                <CardHeader className="text-center bg-green-50 py-6 border-b">
-                    <div className="flex flex-col items-center gap-2">
-                        <CheckCircle className="text-green-600 w-10 h-10" />
-                        <CardTitle className="text-2xl font-bold text-green-700">
-                            Thank You for Your Order!
-                        </CardTitle>
-                        <p className="text-gray-600 text-sm">
-                            Your booking has been successfully placed.
-                        </p>
+        <div className="max-w-4xl mx-auto my-10 px-4 space-y-6">
+            <BookingSteps activeStep={4} completedSteps={[0, 1, 2, 3]} />
+            <Card className="shadow-sm dark:shadow-none">
+                <CardHeader className="text-center space-y-4 pb-6">
+                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/50">
+                        <CheckCircle2 className="h-6 w-6 text-green-600 dark:text-green-400" />
                     </div>
+                    <CardTitle className="text-2xl font-bold text-green-600 dark:text-green-400">
+                        Booking Confirmed!
+                    </CardTitle>
+                    <p className="text-muted-foreground">
+                        Booking ID: <span className="font-mono font-medium">{successBooking.booking_id || "N/A"}</span>
+                    </p>
                 </CardHeader>
 
-                <CardContent className="p-6 space-y-8">
-                    <Section title="Customer Info">
-                        <Detail icon={<User />} label="Name" value={`${successBooking.first_name} ${successBooking.last_name}`} />
-                        <Detail icon={<Phone />} label="Phone" value={successBooking.phone} />
-                        <Detail icon={<BadgeCheck />} label="Email" value={successBooking.email} />
+                <CardContent className="space-y-6">
+                    <Section 
+                        title="Customer Information" 
+                        icon={<User className="h-4 w-4" />}
+                    >
+                        <DetailGrid>
+                            <Detail icon={<User className="h-4 w-4" />} 
+                                   label="Name" 
+                                   value={`${successBooking.first_name} ${successBooking.last_name}`} />
+                            <Detail icon={<Phone className="h-4 w-4" />} 
+                                   label="Phone" 
+                                   value={successBooking.phone} />
+                            <Detail icon={<Mail className="h-4 w-4" />} 
+                                   label="Email" 
+                                   value={successBooking.email} />
+                        </DetailGrid>
                     </Section>
 
-                    <Divider />
+                    <Separator />
 
-                    <Section title="Trip Details">
-                        <Detail icon={<MapPin />} label="From" value={successBooking.from_location} />
-                        <Detail icon={<MapPin />} label="To" value={successBooking.to_location} />
-                        <Detail icon={<Calendar />} label="Pickup Date" value={successBooking.pickup_date} />
-                        <Detail icon={<Calendar />} label="Pickup Time" value={successBooking.pickup_time} />
-                        {successBooking.trip_type === "return" && (
-                            <>
-                                <Detail icon={<Calendar />} label="Dropoff Date" value={successBooking.dropoff_date} />
-                                <Detail icon={<Calendar />} label="Dropoff Time" value={successBooking.dropoff_time} />
-                            </>
-                        )}
-                        <Detail label="Trip Type" value={successBooking.trip_type} />
-                        <Detail label="Distance (KM)" value={successBooking.distance_km} />
-                        <Detail label="Estimated Travel Time" value={successBooking.estimated_travel_time} />
+                    <Section 
+                        title="Trip Details" 
+                        icon={<Navigation className="h-4 w-4" />}
+                    >
+                        <div className="space-y-3">
+                            <div className="flex items-start gap-3 p-3 rounded-lg bg-muted/50">
+                                <MapPin className="h-4 w-4 mt-0.5 text-muted-foreground" />
+                                <div>
+                                    <p className="text-sm text-muted-foreground">Pickup Location</p>
+                                    <p className="font-medium">{successBooking.from_location}</p>
+                                </div>
+                            </div>
+                            
+                            <div className="flex items-start gap-3 p-3 rounded-lg bg-muted/50">
+                                <MapPin className="h-4 w-4 mt-0.5 text-muted-foreground" />
+                                <div>
+                                    <p className="text-sm text-muted-foreground">Dropoff Location</p>
+                                    <p className="font-medium">{successBooking.to_location}</p>
+                                </div>
+                            </div>
+                            
+                            <DetailGrid>
+                                <Detail icon={<CalendarDays className="h-4 w-4" />} 
+                                       label="Pickup Date & Time" 
+                                       value={`${successBooking.pickup_date} at ${successBooking.pickup_time}`} />
+                                
+                                {successBooking.trip_type === "return" && (
+                                    <Detail icon={<CalendarDays className="h-4 w-4" />} 
+                                           label="Return Date & Time" 
+                                           value={`${successBooking.dropoff_date} at ${successBooking.dropoff_time}`} />
+                                )}
+                                
+                                <Detail icon={<Clock className="h-4 w-4" />} 
+                                       label="Estimated Duration" 
+                                       value={successBooking.estimated_travel_time} />
+                                
+                                <Detail icon={<Car className="h-4 w-4" />} 
+                                       label="Vehicle Category" 
+                                       value={successBooking.category} />
+                                
+                                <Detail icon={<Luggage className="h-4 w-4" />} 
+                                       label="Trip Type" 
+                                       value={successBooking.trip_type} />
+                                
+                                <Detail icon={<Info className="h-4 w-4" />} 
+                                       label="Distance" 
+                                       value={`${successBooking.distance_km} km`} />
+                            </DetailGrid>
+                        </div>
                     </Section>
 
-                    <Divider />
+                    <Separator />
 
-                    <Section title="Pricing">
-                        <Detail icon={<DollarSign />} label="Rate per KM" value={`Rs. ${successBooking.rate_per_km}`} />
-                        <Detail label="Base Price" value={`Rs. ${successBooking.price}`} />
-                        <Detail label="Coupon ID" value={successBooking.coupon_id || "N/A"} />
-                        <Detail label="Final Price" value={`Rs. ${successBooking.price_after_coupon}`} />
+                    <Section 
+                        title="Payment Summary" 
+                        icon={<DollarSign className="h-4 w-4" />}
+                    >
+                        <div className="bg-muted/50 p-4 rounded-lg">
+                            <DetailGrid>
+                                <Detail label="Base Fare" value={`€ ${successBooking.price}`} />
+                                <Detail label="Rate per KM" value={`€ ${successBooking.rate_per_km}/km`} />
+                                {successBooking.coupon_id && (
+                                    <Detail label="Coupon Applied" value={successBooking.coupon_id} />
+                                )}
+                                <Detail label="Discount" 
+                                       value={successBooking.coupon_id ? `-€ ${successBooking.price - successBooking.price_after_coupon}` : "€ 0"} />
+                            </DetailGrid>
+                            
+                            <div className="mt-4 pt-4 border-t flex justify-between items-center">
+                                <span className="font-semibold">Total Amount</span>
+                                <span className="text-2xl font-bold">
+                                    € {successBooking.price_after_coupon}
+                                </span>
+                            </div>
+                            
+                            <Detail icon={<CreditCard className="h-4 w-4" />} 
+                                   label="Payment Method" 
+                                   value={successBooking.payment_method || "Cash"} 
+                                   className="mt-4" />
+                        </div>
                     </Section>
 
-                    <Divider />
+                    <Separator />
 
-                    <Section title="Other Info">
-                        <Detail label="Booking Type" value={successBooking.booking_type} />
-                        <Detail label="Category" value={successBooking.category} />
-                        <Detail
-                            label="Status"
-                            value={
-                                successBooking.status === 0 ? (
-                                    <span className="text-orange-500 font-semibold">Pending</span>
-                                ) : (
-                                    <span className="text-green-600 font-semibold">Confirmed</span>
-                                )
-                            }
-                        />
+                    <Section 
+                        title="Booking Status" 
+                        icon={<BadgeCheck className="h-4 w-4" />}
+                    >
+                        <Badge 
+                            variant={successBooking.status === 0 ? "secondary" : "default"}
+                            className={`gap-2 text-sm font-normal ${
+                                successBooking.status === 0 
+                                    ? "bg-orange-100 text-orange-800 dark:bg-orange-900/50 dark:text-orange-200" 
+                                    : "bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-200"
+                            }`}
+                        >
+                            {successBooking.status === 0 ? (
+                                <>
+                                    <Clock className="h-4 w-4" />
+                                    Pending Confirmation
+                                </>
+                            ) : (
+                                <>
+                                    <CheckCircle2 className="h-4 w-4" />
+                                    Confirmed
+                                </>
+                            )}
+                        </Badge>
+                        <p className="text-sm text-muted-foreground mt-2">
+                            {successBooking.status === 0 
+                                ? "Your booking is being processed" 
+                                : "Your booking is confirmed"}
+                        </p>
                     </Section>
                 </CardContent>
             </Card>
@@ -93,25 +172,31 @@ const BookingSuccessCard = () => {
     );
 };
 
-const Section = ({ title, children }) => (
+const Section = ({ title, children, icon }) => (
     <div>
-        <h3 className="text-lg font-semibold mb-4">{title}</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">{children}</div>
+        <div className="flex items-center gap-2 mb-3">
+            {icon}
+            <h3 className="text-lg font-semibold">{title}</h3>
+        </div>
+        {children}
     </div>
 );
 
-const Detail = ({ label, value, icon }) => (
-    <div className="flex items-start gap-2">
-        {icon && <div className="mt-1 text-muted-foreground">{icon}</div>}
-        <div className="flex flex-col">
-            <span className="text-xs">{label}</span>
-            <span className="font-medium">{value}</span>
+const DetailGrid = ({ children }) => (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {children}
+    </div>
+);
+
+const Detail = ({ label, value, icon, className = "" }) => (
+    <div className={`flex items-start gap-3 ${className}`}>
+        {icon && <div className="mt-0.5 text-muted-foreground">{icon}</div>}
+        <div className="flex-1">
+            <p className="text-sm text-muted-foreground">{label}</p>
+            <p className="font-medium">{value}</p>
         </div>
     </div>
 );
 
-const Divider = () => (
-    <div className="border-t border-dashed border-gray-200 my-4" />
-);
-
 export default BookingSuccessCard;
+

@@ -3,29 +3,29 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { Textarea } from "../ui/textarea";
-import CheckoutCarCard from "./checkout-car-card";
-import CheckoutCoupon from "./checkout-coupon";
 import { useDispatch, useSelector } from "react-redux";
-import CheckoutTripDetails from "./checkout-trip-details";
 import { useState } from "react";
 import { Loader } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { setSuccessBookingData } from "@/redux/successBookingSlice";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import BookingSteps from "../web/booking-steps";
+import CarSmallCard from "../ui/car-small-card";
+import BookingCoupon from "./booking-coupon";
+import BookingTripDetails from "./booking-trip-details";
 
 const baseUrl = "https://transfer511.webedevs.com/public/api";
 
-function CheckoutForm() {
+function BookingOverviewForm() {
     const router = useRouter();
     const dispatch = useDispatch();
     const { selectCar } = useSelector((state) => state);
     const { booking } = useSelector((state) => state);
+    const { contactDetails } = useSelector((state) => state);
     const [btnLoader, setBtnLoader] = useState(false);
     const [couponData, setCouponData] = useState({
         id: "",
@@ -34,26 +34,10 @@ function CheckoutForm() {
 
     const formik = useFormik({
         initialValues: {
-            firstName: "",
-            lastName: "",
-            phone: "",
-            email: "",
-            flight: "",
-            passengers: "",
-            luggage: "",
-            notes: "",
             agreeTerms: false,
             paymentMethod: "",
         },
         validationSchema: Yup.object({
-            firstName: Yup.string().required("First name is required"),
-            lastName: Yup.string().required("Last name is required"),
-            phone: Yup.string().required("Phone is required"),
-            email: Yup.string().email("Invalid email").required("Email is required"),
-            flight: Yup.string().required("Flight number is required"),
-            passengers: Yup.string().required("Number of passengers is required"),
-            luggage: Yup.string().required("Luggage info is required"),
-            notes: Yup.string().required("Order notes are required"),
             agreeTerms: Yup.boolean().oneOf([true], "You must accept terms"),
             paymentMethod: Yup.string().required("Payment method is required"),
         }),
@@ -75,10 +59,10 @@ function CheckoutForm() {
                 formData.append("dropoff_time", booking?.dropoff_time);
             }
 
-            formData.append("first_name", values?.firstName);
-            formData.append("last_name", values?.lastName);
-            formData.append("phone", values?.phone);
-            formData.append("email", values?.email);
+            formData.append("first_name", contactDetails?.firstName);
+            formData.append("last_name", contactDetails?.lastName);
+            formData.append("phone", contactDetails?.phone);
+            formData.append("email", contactDetails?.email);
 
             formData.append("product_category_id", selectCar?.id);
             formData.append("category", selectCar?.category);
@@ -104,7 +88,7 @@ function CheckoutForm() {
                     setBtnLoader(false);
                     router.push("/booking-succes");
                 } else {
-                    toast.error(result?.errors || "Something went wrong");
+                    toast.error(result?.message || "Something went wrong");
                     setBtnLoader(false);
                 }
             } catch (err) {
@@ -124,123 +108,13 @@ function CheckoutForm() {
 
     return (
         <form onSubmit={formik.handleSubmit} className="max-w-4xl mx-auto px-4 py-8">
-            <div className="flex justify-between items-center mb-8">
-                <div className="flex items-center gap-2 text-sm">
-                    <span className="font-semibold text-primary">Search</span>
-                    <span className="text-muted-foreground">→</span>
-                    <span className="font-semibold text-primary">Cars</span>
-                    <span className="text-muted-foreground">→</span>
-                    <span className="font-semibold text-primary">Payment Details</span>
-                </div>
-            </div>
-
-            <CheckoutCarCard selectCar={selectCar} />
-            <CheckoutTripDetails booking={booking} />
-            <CheckoutCoupon
+            <BookingSteps activeStep={3} completedSteps={[0, 1, 2]} />
+            <CarSmallCard selectCar={selectCar} />
+            <BookingTripDetails booking={booking} />
+            <BookingCoupon
                 price={selectCar?.price}
                 setCouponData={setCouponData}
             />
-
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <Card>
-                    <CardHeader>
-                        <CardTitle className="text-lg">Billing Details</CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                        <div>
-                            <Input
-                                name="firstName"
-                                placeholder="First Name *"
-                                value={formik.values.firstName}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                            />
-                            {renderError("firstName")}
-                        </div>
-                        <div>
-                            <Input
-                                name="lastName"
-                                placeholder="Last Name *"
-                                value={formik.values.lastName}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                            />
-                            {renderError("lastName")}
-                        </div>
-                        <div>
-                            <Input
-                                name="phone"
-                                placeholder="Phone Number *"
-                                value={formik.values.phone}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                            />
-                            {renderError("phone")}
-                        </div>
-                        <div>
-                            <Input
-                                name="email"
-                                type="email"
-                                placeholder="Email Address *"
-                                value={formik.values.email}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                            />
-                            {renderError("email")}
-                        </div>
-                    </CardContent>
-                </Card>
-
-                <Card>
-                    <CardHeader>
-                        <CardTitle className="text-lg">Additional Information</CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                        <div>
-                            <Input
-                                name="flight"
-                                placeholder="Flight number *"
-                                value={formik.values.flight}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                            />
-                            {renderError("flight")}
-                        </div>
-                        <div>
-                            <Input
-                                name="passengers"
-                                placeholder="Passengers *"
-                                value={formik.values.passengers}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                            />
-                            {renderError("passengers")}
-                        </div>
-                        <div>
-                            <Input
-                                name="luggage"
-                                placeholder="Luggage *"
-                                value={formik.values.luggage}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                            />
-                            {renderError("luggage")}
-                        </div>
-                        <div>
-                            <Textarea
-                                name="notes"
-                                placeholder="Order notes *"
-                                rows={5}
-                                value={formik.values.notes}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                            />
-                            {renderError("notes")}
-                        </div>
-                    </CardContent>
-                </Card>
-            </div>
 
             <Card className="mb-6">
                 <CardHeader>
@@ -327,4 +201,5 @@ function CheckoutForm() {
     );
 }
 
-export default CheckoutForm;
+export default BookingOverviewForm;
+

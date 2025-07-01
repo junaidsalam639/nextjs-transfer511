@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Phone, Mail, MessageSquare } from "lucide-react"
+import WhatsapSvg from "./whatsap-svg"
 
 export default function SocialSidebar() {
   return (
@@ -7,9 +8,10 @@ export default function SocialSidebar() {
       <div className="flex flex-col">
         <Link
           href="https://wa.me/4917657844670"
+          target="_blank"
           className="bg-green-500 p-3 text-white hover:bg-green-600 transition-colors"
         >
-          <MessageSquare size={20} />
+          <WhatsapSvg />
         </Link>
         <Link href="tel:+4917657844670" className="bg-orange-500 p-3 text-white hover:bg-orange-600 transition-colors">
           <Phone size={20} />

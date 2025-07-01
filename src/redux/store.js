@@ -3,6 +3,7 @@ import { transferAPI } from './createAPI';
 import bookingReducer from './bookingSlice';
 import selectCarReducer from './selectCarSlice';
 import successBookingReducer from './successBookingSlice';
+import contactDetailsReducer from './contactDetailsSlice';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
@@ -10,7 +11,7 @@ import { combineReducers } from 'redux';
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['booking', 'selectCar', 'successBooking']
+    whitelist: ['booking', 'selectCar', 'successBooking', 'contactDetails']
 };
 
 const rootReducer = combineReducers({
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
     booking: bookingReducer,
     selectCar: selectCarReducer,
     successBooking: successBookingReducer,
+    contactDetails: contactDetailsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

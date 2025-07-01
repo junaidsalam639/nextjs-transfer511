@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
-import { Card, CardContent } from "./ui/card";
+import { Card, CardContent } from "../ui/card";
 import { ArrowRight, Luggage, Users } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import Link from "next/link";
 
 function OurFleet() {

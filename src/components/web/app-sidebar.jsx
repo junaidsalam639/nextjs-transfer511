@@ -9,7 +9,7 @@ import {
 } from "lucide-react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
-import { SearchForm } from "@/components/search-form"
+import { SearchForm } from "@/components/web/search-form"
 import {
   Sidebar,
   SidebarContent,
