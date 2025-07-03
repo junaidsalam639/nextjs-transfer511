@@ -1,16 +1,16 @@
+import HomeChoose from "@/components/home/home-choose";
+import HomeHero from "@/components/home/home-hero";
+import HomeHowItsWork from "@/components/home/home-how-its-work";
+import HomeTestimonial from "@/components/home/home-testimonial";
+import HomeYourAdvantages from "@/components/home/home-your-advantages";
+import Count from "@/components/web/count";
+import CTASection from "@/components/web/cta-section";
+import FAQSection from "@/components/web/faq-section";
+import Header from "@/components/web/header";
+import OurFleet from "@/components/web/our-fleet";
+import SocialSidebar from "@/components/web/social-sidebar";
 import { CalendarCheck, ThumbsUp, Bike } from "lucide-react"
-import FAQSection from "@/components/faq-section"
-import CTASection from "@/components/cta-section"
-import HomeHero from "@/components/home/home-hero"
-import HomeYourAdvantages from "@/components/home/home-your-advantages"
-import HomeHowItsWork from "@/components/home/home-how-its-work"
-import OurFleet from "@/components/our-fleet"
-import HomeChoose from "@/components/home/home-choose"
-import HomeTestimonial from "@/components/home/home-testimonial"
-import Count from "@/components/count"
-import Header from "@/components/header"
-import SocialSidebar from "@/components/social-sidebar"
-import Footer from "@/components/footer"
+import { Footer } from "react-day-picker";
 
 export const metadata = {
   title: 'Vehicle Transport Services | FRA-Transfer',
