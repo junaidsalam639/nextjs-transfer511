@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 export const transferAPI = createApi({
     reducerPath: "transferAPI",
     baseQuery: fetchBaseQuery({
-        baseUrl: "https://transfer511.webedevs.com/public/api",
+        baseUrl: "https://j46.e0c.mytemp.website/api",
         headers: {
             'Accept': 'application/json',
             'Authorization': `Bearer ${Cookies.get('token') || ""}`,

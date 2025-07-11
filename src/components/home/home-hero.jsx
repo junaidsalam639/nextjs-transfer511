@@ -16,7 +16,7 @@ function HomeHero() {
                     </h1>
                     <p className="text-white/90 my-4">Easily and quickly book your transfer.</p>
                     <Link
-                        href="https://wa.me/4917657844670"
+                        href="tel:+4917657844670"
                         target="_blank"
                         className="hover:bg-zinc-900 bg-orange-500 text-white py-3 px-6 rounded-lg transition-colors duration-300">
                         +49 176 57844670

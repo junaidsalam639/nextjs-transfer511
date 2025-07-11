@@ -11,14 +11,13 @@ import { useState } from "react";
 import { Loader } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { setSuccessBookingData } from "@/redux/successBookingSlice";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import BookingSteps from "../web/booking-steps";
 import CarSmallCard from "../ui/car-small-card";
 import BookingCoupon from "./booking-coupon";
 import BookingTripDetails from "./booking-trip-details";
 
-const baseUrl = "https://transfer511.webedevs.com/public/api";
+const baseUrl = "https://j46.e0c.mytemp.website/api";
 
 function BookingOverviewForm() {
     const router = useRouter();
@@ -82,6 +81,27 @@ function BookingOverviewForm() {
                     }
                 });
                 const result = await response.json();
+
+                console.log(result, 'response from booking api');
+
+                if (values.paymentMethod === "paypal" || values.paymentMethod === "credit-card") {
+                    const formData = new FormData();
+                    formData.append("name", result?.data?.first_name + " " + result?.data?.last_name);
+                    formData.append("email", result?.data?.email);
+                    formData.append("booking_id", result?.data?.id);
+                    formData.append("amount", result?.data?.price);
+                    const responsePayment = await fetch(`${baseUrl}/checkout`, {
+                        method: "POST",
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json',
+                        }
+                    });
+                    const resultPayment = await responsePayment.json();
+                    window.location.href = resultPayment?.checkout_url;
+                    console.log(resultPayment, 'response from payment api');
+                }
+
                 if (response.ok) {
                     dispatch(setSuccessBookingData(result?.data));
                     toast.success(result?.message || "Booking successful");
@@ -102,7 +122,6 @@ function BookingOverviewForm() {
         formik.touched[field] && formik.errors[field] ? (
             <p className="text-sm text-red-500">{formik.errors[field]}</p>
         ) : null;
-
 
     const cost = (couponData?.price / 119 * 19);
 
@@ -188,7 +207,9 @@ function BookingOverviewForm() {
             </div>
             {renderError("agreeTerms")}
 
-            <Button disabled={btnLoader} type="submit" className="w-full bg-zinc-900 hover:bg-orange-500 text-white">
+            <Button 
+            // disabled={btnLoader} 
+            type="submit" className="w-full bg-zinc-900 hover:bg-orange-500 text-white">
                 {btnLoader ? (
                     <div className="animate-spin">
                         <Loader />
