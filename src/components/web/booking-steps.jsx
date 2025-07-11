@@ -15,7 +15,7 @@ const steps = [
     completedIcon: <Check className="w-5 h-5" />
   },
   { 
-    title: "Enter the contact details",
+    title: "Enter the contact",
     icon: <UserCircle className="w-5 h-5" />,
     completedIcon: <Check className="w-5 h-5" />
   },
@@ -28,7 +28,7 @@ const steps = [
 
 const BookingSteps = ({ activeStep, completedSteps = [] }) => {
   return (
-    <div className="flex items-center justify-between w-full max-w-5xl mx-auto px-6 py-10">
+    <div className="flex items-center justify-between w-full md:max-w-5xl mx-auto md:px-6 py-10">
       {steps.map((step, index) => {
         const isActive = index === activeStep;
         const isCompleted = completedSteps.includes(index);
@@ -40,14 +40,14 @@ const BookingSteps = ({ activeStep, completedSteps = [] }) => {
                 className={cn(
                   "w-12 h-12 rounded-full flex items-center justify-center border-2 transition-colors duration-300",
                   isActive
-                    ? "border-orange-500 bg-orange-100 text-orange-600 animate-pulse"
-                    : isCompleted
-                    ? "border-green-500 bg-green-500 text-white"
-                    : "border-gray-300 bg-white text-black"
+                  ? "border-orange-500 bg-orange-100 text-orange-600 animate-pulse"
+                  : isCompleted
+                  ? "border-green-500 bg-green-500 text-white"
+                  : "border-gray-300 bg-white text-black"
                 )}
-              >
+                >
                 {isCompleted ? step.completedIcon : step.icon}
-              </div>
+                </div>
               <span
                 className={cn(
                   "mt-3 text-sm font-medium text-center max-w-[130px] transition-colors duration-300",

@@ -98,7 +98,7 @@ const TripDetailSection = () => {
             <Card key={idx} className="hover:shadow-lg transition-shadow py-0">
               <CardContent className="p-0">
                 <img
-                  src={`https://transfer511.webedevs.com/public/storage/${car?.image}`}
+                  src={`https://j46.e0c.mytemp.website/storage/${car?.image}`}
                   alt={car?.title}
                   className="w-full h-48 object-cover rounded-t-lg"
                 />

@@ -4,7 +4,7 @@ import WhatsapSvg from "./whatsap-svg"
 
 export default function SocialSidebar() {
   return (
-    <div className="fixed right-0 top-1/2 -translate-y-1/2 z-40 block">
+    <div className="fixed right-0 top-1/4 -translate-y-1/2 z-40 block">
       <div className="flex flex-col">
         <Link
           href="https://wa.me/4917657844670"

@@ -76,7 +76,7 @@ export function EditProductsForm({ id }) {
 
   useEffect(() => {
     if (data?.data?.image) {
-      setImagePreview(`https://transfer511.webedevs.com/public/storage/${data.data.image}`);
+      setImagePreview(`https://j46.e0c.mytemp.website/storage/${data.data.image}`);
     }
   }, [data]);
 

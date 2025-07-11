@@ -5,12 +5,14 @@ import Header from "@/components/web/header";
 import SocialSidebar from "@/components/web/social-sidebar";
 import Footer from "@/components/web/footer";
 import Link from "next/link";
+import HeroSection from "@/components/web/hero-section";
 
 const SuccessPage = () => {
     return (
         <>
             <Header />
-            <div className="min-h-screen flex items-center justify-center px-4">
+            <HeroSection title="Payment Successful!" subtitle="Book your transfer easily and quickly" />
+            <div className="py-20 flex items-center justify-center px-4">
                 <Card className="max-w-md w-full text-center shadow-xl p-6">
                     <CheckCircle className="text-green-500 w-20 h-20 mx-auto mb-4" />
                     <h2 className="text-2xl font-bold">Payment Successful!</h2>

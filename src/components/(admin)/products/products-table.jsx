@@ -53,7 +53,7 @@ export function ProductsTable() {
                 const imgSrc = row.getValue("image");
                 return (
                     <img
-                        src={`https://transfer511.webedevs.com/public/storage/${imgSrc}`}
+                        src={`https://j46.e0c.mytemp.website/storage/${imgSrc}`}
                         alt="car"
                         className="w-14 h-14 object-cover rounded"
                     />
