@@ -81,25 +81,33 @@ function BookingOverviewForm() {
                     }
                 });
                 const result = await response.json();
+                const newFormData = new FormData();
+                newFormData.append("name", result?.data?.first_name + " " + result?.data?.last_name);
+                newFormData.append("email", result?.data?.email);
+                newFormData.append("booking_id", result?.data?.id);
+                newFormData.append("amount", result?.data?.price);
 
-                console.log(result, 'response from booking api');
-
-                if (values.paymentMethod === "paypal" || values.paymentMethod === "credit-card") {
-                    const formData = new FormData();
-                    formData.append("name", result?.data?.first_name + " " + result?.data?.last_name);
-                    formData.append("email", result?.data?.email);
-                    formData.append("booking_id", result?.data?.id);
-                    formData.append("amount", result?.data?.price);
+                if (values.paymentMethod === "credit-card") {
                     const responsePayment = await fetch(`${baseUrl}/checkout`, {
                         method: "POST",
-                        body: formData,
+                        body: newFormData,
                         headers: {
                             'Accept': 'application/json',
                         }
                     });
                     const resultPayment = await responsePayment.json();
                     window.location.href = resultPayment?.checkout_url;
-                    console.log(resultPayment, 'response from payment api');
+                }
+                if (values.paymentMethod === "paypal") {
+                    const responsePayment = await fetch(`${baseUrl}/checkout/paypal`, {
+                        method: "POST",
+                        body: newFormData,
+                        headers: {
+                            'Accept': 'application/json',
+                        }
+                    });
+                    const resultPayment = await responsePayment.json();
+                    window.location.href = resultPayment?.link;
                 }
 
                 if (response.ok) {
@@ -207,9 +215,9 @@ function BookingOverviewForm() {
             </div>
             {renderError("agreeTerms")}
 
-            <Button 
-            // disabled={btnLoader} 
-            type="submit" className="w-full bg-zinc-900 hover:bg-orange-500 text-white">
+            <Button
+                disabled={btnLoader} 
+                type="submit" className="w-full bg-zinc-900 hover:bg-orange-500 text-white">
                 {btnLoader ? (
                     <div className="animate-spin">
                         <Loader />

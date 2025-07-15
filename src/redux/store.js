@@ -1,12 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers } from 'redux';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
 import { transferAPI } from './createAPI';
 import bookingReducer from './bookingSlice';
 import selectCarReducer from './selectCarSlice';
 import successBookingReducer from './successBookingSlice';
 import contactDetailsReducer from './contactDetailsSlice';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import { combineReducers } from 'redux';
 
 const persistConfig = {
     key: 'root',
