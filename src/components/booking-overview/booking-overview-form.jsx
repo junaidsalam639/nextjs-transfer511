@@ -16,6 +16,7 @@ import BookingSteps from "../web/booking-steps";
 import CarSmallCard from "../ui/car-small-card";
 import BookingCoupon from "./booking-coupon";
 import BookingTripDetails from "./booking-trip-details";
+import { setSuccessBookingData } from "@/redux/successBookingSlice";
 
 const baseUrl = "https://j46.e0c.mytemp.website/api";
 
@@ -87,7 +88,7 @@ function BookingOverviewForm() {
                 newFormData.append("booking_id", result?.data?.id);
                 newFormData.append("amount", result?.data?.price);
 
-                if (values.paymentMethod === "credit-card") {
+                if (values?.paymentMethod === "credit-card") {
                     const responsePayment = await fetch(`${baseUrl}/checkout`, {
                         method: "POST",
                         body: newFormData,
@@ -98,7 +99,7 @@ function BookingOverviewForm() {
                     const resultPayment = await responsePayment.json();
                     window.location.href = resultPayment?.checkout_url;
                 }
-                if (values.paymentMethod === "paypal") {
+                if (values?.paymentMethod === "paypal") {
                     const responsePayment = await fetch(`${baseUrl}/checkout/paypal`, {
                         method: "POST",
                         body: newFormData,
@@ -109,8 +110,7 @@ function BookingOverviewForm() {
                     const resultPayment = await responsePayment.json();
                     window.location.href = resultPayment?.link;
                 }
-
-                if (response.ok) {
+                if (response.ok && values?.paymentMethod === "cash") {
                     dispatch(setSuccessBookingData(result?.data));
                     toast.success(result?.message || "Booking successful");
                     setBtnLoader(false);
@@ -197,6 +197,7 @@ function BookingOverviewForm() {
                         <RadioGroupItem value="credit-card" id="credit-card" className="cursor-pointer" />
                         <Label className="cursor-pointer" htmlFor="credit-card">Credit Card (Stripe)</Label>
                     </div>
+                    {renderError("paymentMethod")}
                 </RadioGroup>
             </Card>
 
@@ -216,7 +217,7 @@ function BookingOverviewForm() {
             {renderError("agreeTerms")}
 
             <Button
-                disabled={btnLoader} 
+                disabled={btnLoader}
                 type="submit" className="w-full bg-zinc-900 hover:bg-orange-500 text-white">
                 {btnLoader ? (
                     <div className="animate-spin">
