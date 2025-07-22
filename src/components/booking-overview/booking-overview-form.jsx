@@ -1,5 +1,6 @@
 "use client";
 import { useFormik } from "formik";
+import Swal from 'sweetalert2';
 import * as Yup from "yup";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -88,6 +89,7 @@ function BookingOverviewForm() {
                 newFormData.append("booking_id", result?.data?.id);
                 newFormData.append("amount", result?.data?.price);
 
+                // Stripe Payment Api Integrate Start
                 if (values?.paymentMethod === "credit-card") {
                     const responsePayment = await fetch(`${baseUrl}/checkout`, {
                         method: "POST",
@@ -96,9 +98,34 @@ function BookingOverviewForm() {
                             'Accept': 'application/json',
                         }
                     });
+
                     const resultPayment = await responsePayment.json();
-                    window.location.href = resultPayment?.checkout_url;
+
+                    if (resultPayment?.checkout_url) {
+                        Swal.fire({
+                            title: 'Booking Created!',
+                            text: 'You will be redirected to the payment gateway.',
+                            icon: 'success',
+                            confirmButtonText: 'Proceed to Payment',
+                            confirmButtonColor: '#3085d6',
+                            allowOutsideClick: false,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = resultPayment.checkout_url;
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'Something went wrong while processing payment.',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
                 }
+                // Stripe Payment Api Integrate End
+
+                // Paypal Payment Api Integrate Start
                 if (values?.paymentMethod === "paypal") {
                     const responsePayment = await fetch(`${baseUrl}/checkout/paypal`, {
                         method: "POST",
@@ -107,19 +134,61 @@ function BookingOverviewForm() {
                             'Accept': 'application/json',
                         }
                     });
+
                     const resultPayment = await responsePayment.json();
-                    window.location.href = resultPayment?.link;
+
+                    if (resultPayment?.link) {
+                        Swal.fire({
+                            title: 'Booking Created!',
+                            text: 'You will be redirected to PayPal to complete your payment.',
+                            icon: 'success',
+                            confirmButtonText: 'Proceed to PayPal',
+                            confirmButtonColor: '#3085d6',
+                            allowOutsideClick: false,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = resultPayment.link;
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'Something went wrong while redirecting to PayPal.',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
                 }
+                // Paypal Payment Api Integrate End
+
+                // Cash Payment Api Integrate Start
                 if (response.ok && values?.paymentMethod === "cash") {
                     dispatch(setSuccessBookingData(result?.data));
-                    toast.success(result?.message || "Booking successful");
-                    setBtnLoader(false);
-                    router.push("/booking-succes");
+                    Swal.fire({
+                        title: 'Booking Successful!',
+                        text: result?.message || 'Your booking has been confirmed.',
+                        icon: 'success',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#3085d6',
+                        allowOutsideClick: false,
+                    }).then((resultSwal) => {
+                        if (resultSwal.isConfirmed) {
+                            setBtnLoader(false);
+                            router.push("/booking-succes");
+                        }
+                    });
                 } else {
-                    toast.error(result?.message || "Something went wrong");
+                    Swal.fire({
+                        title: 'Error',
+                        text: result?.message || "Something went wrong",
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
                     setBtnLoader(false);
                 }
+                // Cash Payment Api Integrate End
             } catch (err) {
+                console.log(err)
                 toast.error("Network error or server not responding");
                 setBtnLoader(false);
             }
@@ -134,100 +203,102 @@ function BookingOverviewForm() {
     const cost = (couponData?.price / 119 * 19);
 
     return (
-        <form onSubmit={formik.handleSubmit} className="max-w-4xl mx-auto px-4 py-8">
-            <BookingSteps activeStep={3} completedSteps={[0, 1, 2]} />
-            <CarSmallCard selectCar={selectCar} />
-            <BookingTripDetails booking={booking} />
-            <BookingCoupon
-                price={selectCar?.price}
-                setCouponData={setCouponData}
-            />
-
-            <Card className="mb-6">
-                <CardHeader>
-                    <CardTitle className="text-lg">Your Order</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <Table>
-                        <TableBody>
-                            <TableRow>
-                                <TableCell className="py-2">Product</TableCell>
-                                <TableCell className="py-2 text-right font-semibold">Zwischensumme</TableCell>
-                            </TableRow>
-                            <TableRow className="border-t font-medium">
-                                <TableCell className="py-2">Transfer</TableCell>
-                                <TableCell className="py-2 text-right font-bold">
-                                    € {couponData?.price}
-                                </TableCell>
-                            </TableRow>
-                            <TableRow className="border-t font-medium">
-                                <TableCell className="py-2">Zwischensumme</TableCell>
-                                <TableCell className="py-2 text-right font-bold">
-                                    € {couponData?.price}
-                                </TableCell>
-                            </TableRow>
-                            <TableRow className="border-t font-medium">
-                                <TableCell className="py-2">Gesamtsumme</TableCell>
-                                <TableCell className="py-2 text-right font-bold">
-                                    € {couponData?.price} {" "}
-                                    (inkl. € {cost.toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Umsatzsteuer)
-                                </TableCell>
-                            </TableRow>
-                        </TableBody>
-                    </Table>
-                </CardContent>
-            </Card>
-
-            <Card className="p-6 space-y-4">
-                <RadioGroup
-                    value={formik.values.paymentMethod}
-                    onValueChange={(value) => formik.setFieldValue("paymentMethod", value)}
-                >
-                    <div className="flex items-center space-x-3">
-                        <RadioGroupItem value="cash" id="cash" className="cursor-pointer" />
-                        <Label className="cursor-pointer" htmlFor="cash">Barzahlung (Cash Payment)</Label>
-                    </div>
-
-                    <div className="flex items-center space-x-3">
-                        <RadioGroupItem value="paypal" id="paypal" className="cursor-pointer" />
-                        <Label className="cursor-pointer" htmlFor="paypal">PayPal</Label>
-                    </div>
-
-                    <div className="flex items-center space-x-3">
-                        <RadioGroupItem value="credit-card" id="credit-card" className="cursor-pointer" />
-                        <Label className="cursor-pointer" htmlFor="credit-card">Credit Card (Stripe)</Label>
-                    </div>
-                    {renderError("paymentMethod")}
-                </RadioGroup>
-            </Card>
-
-            <div className="flex items-start space-x-2 my-4">
-                <Checkbox
-                    id="terms"
-                    checked={formik.values.agreeTerms}
-                    onCheckedChange={(val) => formik.setFieldValue("agreeTerms", val)}
+        <>
+            <form onSubmit={formik.handleSubmit} className="max-w-4xl mx-auto px-4 py-8">
+                <BookingSteps activeStep={3} completedSteps={[0, 1, 2]} />
+                <CarSmallCard selectCar={selectCar} />
+                <BookingTripDetails booking={booking} />
+                <BookingCoupon
+                    price={selectCar?.price}
+                    setCouponData={setCouponData}
                 />
-                <Label htmlFor="terms" className="text-sm">
-                    I have read and agree to the{" "}
-                    <Button variant="link" className="text-primary p-0 h-auto">
-                        Terms and Conditions
-                    </Button>
-                </Label>
-            </div>
-            {renderError("agreeTerms")}
 
-            <Button
-                disabled={btnLoader}
-                type="submit" className="w-full bg-zinc-900 hover:bg-orange-500 text-white">
-                {btnLoader ? (
-                    <div className="animate-spin">
-                        <Loader />
-                    </div>
-                ) : (
-                    "Place Order"
-                )}
-            </Button>
-        </form>
+                <Card className="mb-6">
+                    <CardHeader>
+                        <CardTitle className="text-lg">Your Order</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <Table>
+                            <TableBody>
+                                <TableRow>
+                                    <TableCell className="py-2">Product</TableCell>
+                                    <TableCell className="py-2 text-right font-semibold">Zwischensumme</TableCell>
+                                </TableRow>
+                                <TableRow className="border-t font-medium">
+                                    <TableCell className="py-2">Transfer</TableCell>
+                                    <TableCell className="py-2 text-right font-bold">
+                                        € {couponData?.price}
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow className="border-t font-medium">
+                                    <TableCell className="py-2">Zwischensumme</TableCell>
+                                    <TableCell className="py-2 text-right font-bold">
+                                        € {couponData?.price}
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow className="border-t font-medium">
+                                    <TableCell className="py-2">Gesamtsumme</TableCell>
+                                    <TableCell className="py-2 text-right font-bold">
+                                        € {couponData?.price} {" "}
+                                        (inkl. € {cost.toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Umsatzsteuer)
+                                    </TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </CardContent>
+                </Card>
+
+                <Card className="p-6 space-y-4">
+                    <RadioGroup
+                        value={formik.values.paymentMethod}
+                        onValueChange={(value) => formik.setFieldValue("paymentMethod", value)}
+                    >
+                        <div className="flex items-center space-x-3">
+                            <RadioGroupItem value="cash" id="cash" className="cursor-pointer" />
+                            <Label className="cursor-pointer" htmlFor="cash">Barzahlung (Cash Payment)</Label>
+                        </div>
+
+                        <div className="flex items-center space-x-3">
+                            <RadioGroupItem value="paypal" id="paypal" className="cursor-pointer" />
+                            <Label className="cursor-pointer" htmlFor="paypal">PayPal</Label>
+                        </div>
+
+                        <div className="flex items-center space-x-3">
+                            <RadioGroupItem value="credit-card" id="credit-card" className="cursor-pointer" />
+                            <Label className="cursor-pointer" htmlFor="credit-card">Credit Card (Stripe)</Label>
+                        </div>
+                        {renderError("paymentMethod")}
+                    </RadioGroup>
+                </Card>
+
+                <div className="flex items-start space-x-2 my-4">
+                    <Checkbox
+                        id="terms"
+                        checked={formik.values.agreeTerms}
+                        onCheckedChange={(val) => formik.setFieldValue("agreeTerms", val)}
+                    />
+                    <Label htmlFor="terms" className="text-sm">
+                        I have read and agree to the{" "}
+                        <Button variant="link" className="text-primary p-0 h-auto">
+                            Terms and Conditions
+                        </Button>
+                    </Label>
+                </div>
+                {renderError("agreeTerms")}
+
+                <Button
+                    disabled={btnLoader}
+                    type="submit" className="w-full bg-zinc-900 hover:bg-orange-500 text-white">
+                    {btnLoader ? (
+                        <div className="animate-spin">
+                            <Loader />
+                        </div>
+                    ) : (
+                        "Place Order"
+                    )}
+                </Button>
+            </form>
+        </>
     );
 }
 
