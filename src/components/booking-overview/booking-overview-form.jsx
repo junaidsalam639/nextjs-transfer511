@@ -126,7 +126,7 @@ function BookingOverviewForm() {
                 // Stripe Payment Api Integrate End
 
                 // Paypal Payment Api Integrate Start
-                if (values?.paymentMethod === "paypal") {
+                else if (values?.paymentMethod === "paypal") {
                     const responsePayment = await fetch(`${baseUrl}/checkout/paypal`, {
                         method: "POST",
                         body: newFormData,
@@ -134,9 +134,7 @@ function BookingOverviewForm() {
                             'Accept': 'application/json',
                         }
                     });
-
                     const resultPayment = await responsePayment.json();
-
                     if (resultPayment?.link) {
                         Swal.fire({
                             title: 'Booking Created!',
@@ -162,7 +160,7 @@ function BookingOverviewForm() {
                 // Paypal Payment Api Integrate End
 
                 // Cash Payment Api Integrate Start
-                if (response.ok && values?.paymentMethod === "cash") {
+                else if (response.ok && values?.paymentMethod === "cash") {
                     dispatch(setSuccessBookingData(result?.data));
                     Swal.fire({
                         title: 'Booking Successful!',
