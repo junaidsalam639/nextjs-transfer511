@@ -189,7 +189,7 @@ function BookingOverviewForm() {
                 // Cash Payment Api Integrate End
             } catch (err) {
                 console.log(err)
-                toast.error("Network error or server not responding");
+                toast.error(err?.data?.response?.message || "Network error or server not responding");
                 setBtnLoader(false);
             }
         },
