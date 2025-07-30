@@ -63,7 +63,7 @@ const BookingList = ({ selectedBooking }) => {
     }
 
     return (
-        <div className='h-dvh px-14 flex flex-col'>
+        <div className='h-dvh md:px-14 px-4 flex flex-col'>
             <Card className='lg:col-span-2'>
                 <CardHeader>
                     <CardTitle>Bookings</CardTitle>
@@ -81,88 +81,95 @@ const BookingList = ({ selectedBooking }) => {
                         ) : (
                             selectedBooking?.map((booking) => (
                                 <Card
-                                    key={booking.id}
+                                    key={booking?.id}
                                     className='cursor-pointer hover:shadow-md transition-shadow'>
                                     <CardContent className='p-4 space-y-4'>
                                         <div className='flex justify-between items-start'>
                                             <div className='flex items-center gap-2'>
                                                 <Badge
                                                     variant='outline'
-                                                    className={getStatusColor(booking.status)}>
-                                                    {getStatusLabel(booking.status)}
+                                                    className={getStatusColor(booking?.status)}>
+                                                    {getStatusLabel(booking?.status)}
                                                 </Badge>
                                                 <span className='text-sm text-muted-foreground'>
-                                                    #{booking.id}
+                                                    #{booking?.id}
                                                 </span>
                                             </div>
                                             <span className='text-sm font-medium'>
-                                                ${booking.price_after_coupon || booking.price}
+                                                ${booking?.price_after_coupon || booking?.price}
                                             </span>
                                         </div>
 
                                         <div className='flex items-center gap-2 text-sm'>
                                             <User className='w-4 h-4' />
                                             <span>
-                                                {booking.first_name} {booking.last_name}
+                                                {booking?.first_name} {booking?.last_name}
                                             </span>
                                         </div>
+                                        <div className="space-y-1 text-sm">
+                                            <div className="flex items-start gap-2">
+                                                <MapPin className="w-4 h-4 mt-0.5" />
+                                                <div>
+                                                    <span className="font-medium">From:</span> {booking?.from_location}
+                                                </div>
+                                            </div>
 
-                                        <div className='flex items-center gap-2 text-sm'>
-                                            <MapPin className='w-4 h-4' />
-                                            <span className='truncate'>
-                                                {booking.from_location} → {booking.to_location}
-                                            </span>
+                                            <div className="flex items-start gap-2">
+                                                <MapPin className="w-4 h-4 mt-0.5" />
+                                                <div>
+                                                    <span className="font-medium">To:</span> {booking?.to_location}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className='flex gap-4 text-sm'>
+                                            <div className='flex items-center gap-2'>
+                                                <CalendarDays className='w-4 h-4' />
+                                                <span>{booking?.pickup_date}</span>
+                                            </div>
+                                            <div className='flex items-center gap-2'>
+                                                <Clock className='w-4 h-4' />
+                                                <span>{booking?.pickup_time}</span>
+                                            </div>
                                         </div>
 
                                         <div className='flex gap-4 text-sm'>
                                             <div className='flex items-center gap-2'>
                                                 <CalendarDays className='w-4 h-4' />
-                                                <span>{booking.pickup_date}</span>
+                                                <span>{booking?.dropoff_date}</span>
                                             </div>
                                             <div className='flex items-center gap-2'>
                                                 <Clock className='w-4 h-4' />
-                                                <span>{booking.pickup_time}</span>
-                                            </div>
-                                        </div>
-
-                                        <div className='flex gap-4 text-sm'>
-                                            <div className='flex items-center gap-2'>
-                                                <CalendarDays className='w-4 h-4' />
-                                                <span>{booking.dropoff_date}</span>
-                                            </div>
-                                            <div className='flex items-center gap-2'>
-                                                <Clock className='w-4 h-4' />
-                                                <span>{booking.dropoff_time}</span>
+                                                <span>{booking?.dropoff_time}</span>
                                             </div>
                                         </div>
 
                                         <div className='grid grid-cols-2 md:grid-cols-3 gap-2 text-sm text-muted-foreground'>
                                             <p>
-                                                <strong>Type:</strong> {booking.trip_type}
+                                                <strong>Type:</strong> {booking?.trip_type}
                                             </p>
                                             <p>
-                                                <strong>Booking:</strong> {booking.booking_type}
+                                                <strong>Booking:</strong> {booking?.booking_type}
                                             </p>
                                             <p>
-                                                <strong>Category:</strong> {booking.category}
+                                                <strong>Category:</strong> {booking?.category}
                                             </p>
                                             <p>
-                                                <strong>Distance:</strong> {booking.distance_km.toFixed(2)} km
+                                                <strong>Distance:</strong> {booking?.distance_km.toFixed(2)} km
                                             </p>
                                             <p>
                                                 <strong>Estimated Time:</strong>{' '}
-                                                {booking.estimated_travel_time}
+                                                {booking?.estimated_travel_time}
                                             </p>
                                             <p>
-                                                <strong>Rate/km:</strong> ${booking.rate_per_km}
+                                                <strong>Rate/km:</strong> ${booking?.rate_per_km}
                                             </p>
                                         </div>
 
                                         <div className='w-[160px]'>
                                             <Select
-                                                defaultValue={booking.status.toString()}
+                                                defaultValue={booking?.status.toString()}
                                                 onValueChange={(value) =>
-                                                    handleStatusChange(value, booking.id)
+                                                    handleStatusChange(value, booking?.id)
                                                 }>
                                                 <SelectTrigger className='w-full'>
                                                     <SelectValue placeholder='Select status' />

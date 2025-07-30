@@ -42,7 +42,7 @@ export function ShowBookingCalendar() {
     return (
         <>
             <Calendar events={bookingEvents}>
-                <div className="h-dvh p-14 flex flex-col">
+                <div className="h-dvh p-4 md:p-14 flex flex-col">
                     <div className="flex items-center gap-2 mb-6">
                         <CalendarViewTrigger view="month" className="aria-[current=true]:bg-accent">
                             Month
