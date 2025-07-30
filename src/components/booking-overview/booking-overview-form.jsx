@@ -163,7 +163,7 @@ function BookingOverviewForm() {
                 else if (response.ok && values?.paymentMethod === "cash") {
                     dispatch(setSuccessBookingData(result?.data));
                     Swal.fire({
-                        title: 'Booking Successful!',
+                        title: 'Booking Created!',
                         text: result?.message || 'Your booking has been confirmed.',
                         icon: 'success',
                         confirmButtonText: 'OK',
