@@ -9,14 +9,12 @@ import {
     getSortedRowModel,
     useReactTable,
 } from "@tanstack/react-table"
-import { ChevronDown, MoreHorizontal, Pencil, Trash2 } from "lucide-react"
-import Link from "next/link"
+import { ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
     DropdownMenu,
     DropdownMenuCheckboxItem,
     DropdownMenuContent,
-    DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
@@ -28,13 +26,11 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { toast } from "sonner"
-import { useDeleteCouponsMutation, useGetCouponsQuery } from "@/service/couponsApi"
+import { useGetLeadsQuery } from "@/service/contactBookingApi"
 
 
 export function ContactBookingTable() {
-    const { data, isLoading } = useGetCouponsQuery();
-    const [deleteCoupons] = useDeleteCouponsMutation();
+    const { data, isLoading } = useGetLeadsQuery();
     const [sorting, setSorting] = React.useState([]);
     const [columnFilters, setColumnFilters] = React.useState([]);
     const [columnVisibility, setColumnVisibility] = React.useState({});
@@ -47,63 +43,34 @@ export function ContactBookingTable() {
             cell: ({ row }) => <div>{row.getValue("id")}</div>,
         },
         {
-            accessorKey: "code",
-            header: "Code",
-            cell: ({ row }) => <div>{row.getValue("code")}</div>,
+            accessorKey: "first_name",
+            header: "First Name",
+            cell: ({ row }) => <div>{row.getValue("first_name")}</div>,
         },
         {
-            accessorKey: "discount_amount",
-            header: "Discount Amount",
-            cell: ({ row }) => <div>{row.getValue("discount_amount")}</div>,
+            accessorKey: "last_name",
+            header: "Last Name",
+            cell: ({ row }) => <div>{row.getValue("last_name")}</div>,
         },
         {
-            accessorKey: "discount_type",
-            header: "Discount Type",
-            cell: ({ row }) => <div>{row.getValue("discount_type")}</div>,
+            accessorKey: "phone",
+            header: "Phone",
+            cell: ({ row }) => <div>{row.getValue("phone")}</div>,
         },
         {
-            accessorKey: "expiry_date",
-            header: "Expiry Date",
-            cell: ({ row }) => <div>{row.getValue("expiry_date")?.split("T")[0]}</div>,
+            accessorKey: "email",
+            header: "Email",
+            cell: ({ row }) => <div>{row.getValue("email")}</div>,
         },
         {
-            id: "actions",
-            header: "Actions",
-            cell: ({ row }) => {
-                const car = row.original;
-                return (
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" className="h-8 w-8 p-0">
-                                <MoreHorizontal />
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                            <Link href={`/admin-dashboard/coupons/edit-coupons/${car.id}`}>
-                                <DropdownMenuItem className="flex items-center gap-2">
-                                    <Pencil className="w-4 h-4" />
-                                    Edit Coupons
-                                </DropdownMenuItem>
-                            </Link>
-                            <DropdownMenuItem
-                                onClick={async () => {
-                                    try {
-                                        await deleteCoupons(car.id).unwrap();
-                                        toast.success("Coupons deleted successfully");
-                                    } catch (error) {
-                                        console.error("Failed to delete car:", error);
-                                    }
-                                }}
-                                className="flex items-center gap-2 text-red-600 focus:text-red-600"
-                            >
-                                <Trash2 className="w-4 h-4" />
-                                Delete Coupons
-                            </DropdownMenuItem>
-
-                        </DropdownMenuContent>
-                    </DropdownMenu>
-                );
-            },
+            accessorKey: "from_location",
+            header: "From Location",
+            cell: ({ row }) => <div>{row.getValue("from_location")}</div>,
+        },
+        {
+            accessorKey: "to_location",
+            header: "To Location",
+            cell: ({ row }) => <div>{row.getValue("to_location")}</div>,
         },
     ]
 
@@ -131,18 +98,15 @@ export function ContactBookingTable() {
     return (
         <div className="w-full p-5">
             <div className="flex justify-between mb-4">
-                <h1 className="text-2xl font-bold">Coupons</h1>
-                <Link href="/admin-dashboard/coupons/add-coupons">
-                    <Button>Add Coupons</Button>
-                </Link>
+                <h1 className="text-2xl font-bold">Contact Booking</h1>
             </div>
 
             <div className="flex items-center py-4 gap-4">
                 <Input
-                    placeholder="Filter by code..."
-                    value={(table.getColumn("code")?.getFilterValue()) ?? ""}
+                    placeholder="Filter by email..."
+                    value={(table.getColumn("email")?.getFilterValue()) ?? ""}
                     onChange={(e) =>
-                        table.getColumn("code")?.setFilterValue(e.target.value)
+                        table.getColumn("email")?.setFilterValue(e.target.value)
                     }
                     className="max-w-sm"
                 />
