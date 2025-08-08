@@ -40,7 +40,7 @@ const ImprintPage = () => {
 
                     <div className="flex items-center gap-3">
                         <Mail />
-                        <span>Email: <a href="mailto:info@fra-transfer.de">info@fra-transfer.de</a></span>
+                        <span>Email: <a href="mailto:info@transfer511.com">info@transfer511.com</a></span>
                     </div>
 
                     <div className="flex items-center gap-3">

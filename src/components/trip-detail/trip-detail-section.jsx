@@ -1,21 +1,27 @@
 "use client";
-import React from 'react';
-import { GoogleMap, Marker } from '@react-google-maps/api';
-import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { Loader2 } from 'lucide-react';
-import { useGetUserCarQuery } from '@/service/carApi';
-import { useDispatch, useSelector } from 'react-redux';
-import { setSelectCarData } from '@/redux/selectCarSlice';
-import { Skeleton } from '@/components/ui/skeleton';
-import BookingSteps from '../web/booking-steps';
+import React from "react";
+import { GoogleMap, Marker } from "@react-google-maps/api";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardFooter,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { Loader2 } from "lucide-react";
+import { useGetUserCarQuery } from "@/service/carApi";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectCarData } from "@/redux/selectCarSlice";
+import { Skeleton } from "@/components/ui/skeleton";
+import BookingSteps from "../web/booking-steps";
 
 const containerStyle = {
-  width: '100%',
-  height: '100%',
+  width: "100%",
+  height: "100%",
 };
 
 const TripDetailSection = () => {
@@ -27,7 +33,7 @@ const TripDetailSection = () => {
   const carData = data?.data;
 
   React.useEffect(() => {
-    if (typeof window !== 'undefined' && window.google) {
+    if (typeof window !== "undefined" && window.google) {
       setMapsLoaded(true);
     }
   }, []);
@@ -35,59 +41,63 @@ const TripDetailSection = () => {
   const handlerFurther = (car) => {
     dispatch(setSelectCarData(car));
     router.push(`/contact-details`);
-  }
+  };
 
-  if (isLoading) return (
-    <div className="space-y-8 py-4">
-      <div className="container max-w-7xl mx-auto px-4 space-y-8">
-        <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6">
-          {[...Array(3)].map((_, idx) => (
-            <Card key={idx} className="hover:shadow-lg transition-shadow py-0">
-              <CardContent className="p-0">
-                <Skeleton className="w-full h-48 rounded-t-lg" />
-                <div className="p-4 space-y-3">
-                  <Skeleton className="h-6 w-3/4" />
-                  <div className="space-y-2">
-                    <Skeleton className="h-4 w-full" />
-                    <Skeleton className="h-4 w-5/6" />
-                    <Skeleton className="h-4 w-4/5" />
+  if (isLoading)
+    return (
+      <div className="space-y-8 py-4">
+        <div className="container max-w-7xl mx-auto px-4 space-y-8">
+          <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6">
+            {[...Array(3)].map((_, idx) => (
+              <Card
+                key={idx}
+                className="hover:shadow-lg transition-shadow py-0"
+              >
+                <CardContent className="p-0">
+                  <Skeleton className="w-full h-48 rounded-t-lg" />
+                  <div className="p-4 space-y-3">
+                    <Skeleton className="h-6 w-3/4" />
+                    <div className="space-y-2">
+                      <Skeleton className="h-4 w-full" />
+                      <Skeleton className="h-4 w-5/6" />
+                      <Skeleton className="h-4 w-4/5" />
+                    </div>
+                    <Skeleton className="h-6 w-1/2" />
+                    <Skeleton className="h-8 w-full mt-4" />
                   </div>
-                  <Skeleton className="h-6 w-1/2" />
-                  <Skeleton className="h-8 w-full mt-4" />
-                </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            <Card>
+              <CardHeader>
+                <Skeleton className="h-6 w-1/3" />
+              </CardHeader>
+              <Separator />
+              <CardContent className="space-y-4">
+                {[...Array(6)].map((_, idx) => (
+                  <React.Fragment key={idx}>
+                    <div className="flex justify-between">
+                      <Skeleton className="h-4 w-1/4" />
+                      <Skeleton className="h-4 w-1/3" />
+                    </div>
+                    <Separator />
+                  </React.Fragment>
+                ))}
               </CardContent>
             </Card>
-          ))}
-        </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
-          <Card>
-            <CardHeader>
-              <Skeleton className="h-6 w-1/3" />
-            </CardHeader>
-            <Separator />
-            <CardContent className="space-y-4">
-              {[...Array(6)].map((_, idx) => (
-                <React.Fragment key={idx}>
-                  <div className="flex justify-between">
-                    <Skeleton className="h-4 w-1/4" />
-                    <Skeleton className="h-4 w-1/3" />
-                  </div>
-                  <Separator />
-                </React.Fragment>
-              ))}
-            </CardContent>
-          </Card>
-
-          <Card className="h-full">
-            <CardContent className="p-0 h-80">
-              <Skeleton className="h-full w-full" />
-            </CardContent>
-          </Card>
+            <Card className="h-full">
+              <CardContent className="p-0 h-full">
+                <Skeleton className="h-full w-full" />
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
 
   return (
     <div className="space-y-8 py-4">
@@ -106,18 +116,31 @@ const TripDetailSection = () => {
                   <CardTitle className="text-xl mb-3">{car?.name}</CardTitle>
                   <ul className="text-sm text-muted-foreground space-y-2 mb-4">
                     {car?.features?.map((fea, idx) => (
-                      <li className="flex items-start gap-2 text-black dark:text-white" key={idx}>
+                      <li
+                        className="flex items-start gap-2 text-black dark:text-white"
+                        key={idx}
+                      >
                         <span>✓</span> {fea}
                       </li>
                     ))}
                   </ul>
                   <div className="flex justify-between text-sm">
-                    <Badge variant="secondary">🧑‍🤝‍🧑 {car?.passenger_capacity} Passenger</Badge>
+                    <Badge variant="secondary">
+                      🧑‍🤝‍🧑 {car?.passenger_capacity} Passenger
+                    </Badge>
                   </div>
-                  <p className="text-xl font-bold text-orange-500 w-full text-right">€{booking[car?.category]?.price}</p>
+                  <p className="text-xl font-bold text-orange-500 w-full text-right">
+                    €{booking[car?.category]?.price}
+                  </p>
                   <Button
-                    onClick={() => handlerFurther({ ...car, price: booking[car?.category]?.price })}
-                    className="w-full bg-orange-500 hover:bg-orange-600">
+                    onClick={() =>
+                      handlerFurther({
+                        ...car,
+                        price: booking[car?.category]?.price,
+                      })
+                    }
+                    className="w-full bg-orange-500 hover:bg-orange-600"
+                  >
                     Further
                   </Button>
                 </div>
@@ -166,7 +189,7 @@ const TripDetailSection = () => {
           </Card>
 
           <Card className="h-full">
-            <CardContent className="p-0 h-80">
+            <CardContent className="p-0 h-full">
               {mapsLoaded ? (
                 <GoogleMap
                   mapContainerStyle={containerStyle}
@@ -192,4 +215,3 @@ const TripDetailSection = () => {
 };
 
 export default TripDetailSection;
-

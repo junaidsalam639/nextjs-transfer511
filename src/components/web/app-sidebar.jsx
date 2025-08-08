@@ -1,15 +1,16 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   Package,
   Percent,
   LayoutDashboard,
   BookIcon,
-} from "lucide-react"
-import { usePathname } from "next/navigation"
-import Link from "next/link"
-import { SearchForm } from "@/components/web/search-form"
+  Contact2Icon,
+} from "lucide-react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { SearchForm } from "@/components/web/search-form";
 import {
   Sidebar,
   SidebarContent,
@@ -21,7 +22,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
 const data = {
   navMain: [
@@ -49,13 +50,18 @@ const data = {
           url: "/admin-dashboard/booking",
           icon: <BookIcon className="w-4 h-4 mr-2" />,
         },
+        {
+          title: "Contact Booking",
+          url: "/admin-dashboard/contact-booking",
+          icon: <Contact2Icon className="w-4 h-4 mr-2" />,
+        },
       ],
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }) {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <Sidebar {...props}>
@@ -69,13 +75,17 @@ export function AppSidebar({ ...props }) {
             <SidebarGroupContent>
               <SidebarMenu>
                 {group.items.map((item) => {
-                  const isActive = pathname === item.url
+                  const isActive = pathname === item.url;
                   return (
                     <SidebarMenuItem key={item.title}>
                       <SidebarMenuButton
                         asChild
                         className={`flex items-center gap-2 px-3 py-2 text-sm rounded-md transition-colors min-w-8 duration-200 ease-linear
-                          ${isActive ? "bg-primary text-primary-foreground" : "hover:bg-muted hover:text-primary"}`}
+                          ${
+                            isActive
+                              ? "bg-primary text-primary-foreground"
+                              : "hover:bg-muted hover:text-primary"
+                          }`}
                       >
                         <Link href={item.url} className="flex items-center">
                           {item.icon}
@@ -83,7 +93,7 @@ export function AppSidebar({ ...props }) {
                         </Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
-                  )
+                  );
                 })}
               </SidebarMenu>
             </SidebarGroupContent>
@@ -92,5 +102,5 @@ export function AppSidebar({ ...props }) {
       </SidebarContent>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }

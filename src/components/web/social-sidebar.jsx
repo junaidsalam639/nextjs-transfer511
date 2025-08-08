@@ -17,7 +17,7 @@ export default function SocialSidebar() {
           <Phone size={20} />
         </Link>
         <Link
-          href="mailto:info@fra-transfer.de"
+          href="mailto:info@transfer511.com"
           className="bg-red-500 p-3 text-white hover:bg-red-600 transition-colors"
         >
           <Mail size={20} />

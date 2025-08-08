@@ -192,6 +192,7 @@ function BookingOverviewForm() {
             }
         },
     });
+    
 
     const renderError = (field) =>
         formik.touched[field] && formik.errors[field] ? (
