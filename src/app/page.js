@@ -10,7 +10,7 @@ import Header from "@/components/web/header";
 import OurFleet from "@/components/web/our-fleet";
 import SocialSidebar from "@/components/web/social-sidebar";
 import { CalendarCheck, ThumbsUp, Bike } from "lucide-react"
-import { Footer } from "react-day-picker";
+import Footer from "@/components/web/footer";
 
 export const metadata = {
   title: 'Vehicle Transport Services | FRA-Transfer',
